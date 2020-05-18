@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.diastore.feature.authentication.login.LogInFragment"
+        android:label="LogInFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_logInFragment_to_main_navigation"
+            app:destination="@id/main_navigation"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.diastore.feature.authentication.welcome.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_main_navigation"
+            app:destination="@id/main_navigation"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.diastore.feature.authentication.signup.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_aboutYouFragment"
+            app:destination="@id/aboutYouFragment" />
+    </fragment>
+    <include app:graph="@navigation/main_navigation" />
+    <fragment
+        android:id="@+id/aboutYouFragment"
+        android:name="com.diastore.feature.authentication.signup.AboutYouFragment"
+        android:label="AboutYouFragment"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_aboutYouFragment_to_main_navigation"
+            app:destination="@id/main_navigation"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

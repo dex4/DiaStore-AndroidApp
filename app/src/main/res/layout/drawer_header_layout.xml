@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".DrawerHeaderBinding">
+
+        <variable
+            name="userName"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_gutter_double"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:layout_marginBottom="@dimen/vertical_gutter_double"
+            android:text="@{userName}"
+            android:textAppearance="@style/Headline2.Bold"
+            android:textColor="@color/colorPrimary"
+            tools:text="John\nDoe" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/drawer_header_separator_height"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
+</layout>

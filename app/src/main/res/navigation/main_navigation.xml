@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.diastore.feature.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_challengesFragment"
+            app:destination="@id/challengesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_entryDetailsFragment"
+            app:destination="@id/entryDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.diastore.feature.settings.ProfileFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.diastore.feature.about.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/challengesFragment"
+        android:name="com.diastore.feature.challenges.ChallengesFragment"
+        android:label="ChallengesFragment"
+        tools:layout="@layout/fragment_challenges" />
+    <fragment
+        android:id="@+id/entryDetailsFragment"
+        android:name="com.diastore.feature.entrydetails.EntryDetailsFragment"
+        android:label="EntryDetailsFragment"
+        tools:layout="@layout/fragment_entry_details">
+        <argument
+            android:name="entry"
+            android:defaultValue="@null"
+            app:argType="com.diastore.model.Entry"
+            app:nullable="true" />
+    </fragment>
+</navigation>

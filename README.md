@@ -1,1 +1,1 @@
-# DiaStore-AndroidApp
+# DiaStore-Android

@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="EntryField">
+        <attr name="entryName" format="string" />
+        <attr name="entryValue" format="string" />
+    </declare-styleable>
+</resources>

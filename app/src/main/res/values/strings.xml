@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">DiaStore</string>
+
+    <!--region Welcome-->
+    <string name="welcome_title">Welcome!</string>
+    <string name="welcome_subtitle">Glucose levels, meals and reports.\nAll in one place.</string>
+    <!--endregion-->
+
+    <!--region Login-->
+    <string name="login_button_text">Log In</string>
+    <string name="log_in_subtitle">We’re happy to see you back!</string>
+    <string name="log_in_email_hint">Email</string>
+    <string name="log_in_password_hint">Password</string>
+    <string name="log_in">Log In</string>
+    <!--endregion-->
+
+    <!--region Sign Up-->
+    <string name="sign_up_button_text">Sign Up</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_subtitle">Welcome!</string>
+    <string name="sign_up_first_name_hint">First Name</string>
+    <string name="sign_up_last_name_hint">Last name</string>
+    <string name="sign_up_email_hint">Email</string>
+    <string name="sign_up_password_hint">Password</string>
+    <string name="sign_up_text_bottom">Already have an account?</string>
+    <string name="sign_up_log_in_bottom">Log In</string>
+    <!--endregion-->
+
+    <!--region About-->
+    <string name="about">About</string>
+    <string name="about_content"><![CDATA[\tDiaStore is an Android application designed to help people with diabetes better manage, review and note their glucose levels, meals and physical activity.\n\tHaving all these things properly stored in one place will help a person with diabetes when they need to make changes in their treatment, present their situation to the doctor that is supervising them and have a history of the treatment to look over and consult when they are unsure what to do in a certain situation.]]></string>
+    <string name="about_terms_and_conditions_title">Terms &amp; Conditions</string>
+    <string name="about_privacy_policy">Privacy Policy</string>
+    <!--endregion-->
+
+    <!--region Settings-->
+    <string name="settings">Profile</string>
+    <string name="view_settings">view settings</string>
+    <string name="settings_name_string">Name</string>
+    <string name="settings_email_string">Email</string>
+    <string name="settings_weight_string">Weight</string>
+    <string name="settings_name_temp">John Doe</string>
+    <string name="settings_email_temp">johndoe@gmail.com</string>
+    <string name="settings_weight_temp">75 kg</string>
+    <string name="settings_height_string">Height</string>
+    <string name="settings_height_temp">175 cm</string>
+    <string name="settings_age_string">Age</string>
+    <string name="settings_age_temp">21</string>
+    <string name="settings_carbs_to_ins_string">Carbs to one insulin unit</string>
+    <string name="settings_carbs_to_ins_temp">20:1</string>
+    <string name="settings_glucose_to_ins_string">Blood glucose to one insulin unit</string>
+    <string name="settings_glucose_to_ins_temp">50:1</string>
+    <string name="settings_change_pass_string">Change Password</string>
+    <string name="settings_log_out_string">LogOut</string>
+    <string name="settings_weight_template">%s kg</string>
+    <!--endregion-->
+
+    <!--region Home-->
+    <string name="home">Home</string>
+    <string name="home_drawer_user_name">%s %s</string>
+    <string name="drawer_food_item_title">Food</string>
+    <string name="drawer_physical_item_title">Physical Activities</string>
+    <string name="drawer_challenges_item_title">Challenges</string>
+    <string name="drawer_settings_item_title">Settings</string>
+    <string name="drawer_about_item_title">About</string>
+    <string name="drawer_statistics_item_title">Statistics</string>
+    <!--endregion-->
+
+
+    <!--  region Challenges  -->
+    <string name="challenges_title">Challenges</string>
+    <string name="challenges_item_1">Keep your body in shape and your blood sugar in check by doing strength workouts!</string>
+    <string name="challenges_item_2">Analyze your eating habits daily and try to improve the way you feel by improving your diet</string>
+    <string name="challenges_item_3">Take a break from your daily routine and make time for a walk or a run. A little exercise goes a long way!</string>
+    <string name="challenges_item_4">Keep track of how your body reacts to different foods and activities and try to make out the patterns. Yoy can learn more about your body every day!</string>
+    <string name="challenges_item_5">There are new discoveries about diabetes every day! Take a few minutes to inform yourself about this, read about other people’s experiences.</string>
+    <string name="challenges_item_6">Share! You are not alone in this! Reach out to give help or get help, there are plenty communities out there to share your experience.</string>
+    <!--  endregion  -->
+
+    <string name="carbs_template">Carbs: %d</string>
+    <string name="insulin_template">Insulin: %.1f</string>
+    <string name="sport_template">Sport: %dmin</string>
+    <string name="moment_before">Before\u0020</string>
+    <string name="moment_after">After\u0020</string>
+    <string name="blood_sugar_level_label_text">Blood sugar level:</string>
+    <string name="carbs_label">Carbs:</string>
+    <string name="insulin_label">Insulin intake:</string>
+    <string name="physical_activity_label">Activity duration:</string>
+    <string name="on_boarding">About You</string>
+    <string name="age_hint">Age</string>
+    <string name="weight_hint">Weight</string>
+    <string name="height_hint">Height</string>
+    <string name="carbs_to_insulin_hint">Carbs to insulin ratio</string>
+    <string name="bloodsugar_to_insulin_hint">Bloodsugar to insulin ratio</string>
+    <string name="confirm">Confirm</string>
+    <string name="settings_height_template">%s cm</string>
+
+    <!--region Entry-->
+    <string name="entry_glucose_level">%dmg/dl</string>
+    <string name="entry_carbs_field_title">Carbs</string>
+    <string name="entry_insulin_field_title">Insulin</string>
+    <string name="entry_sport_field_title">Sport</string>
+    <string name="entry_details_blood_glucose_field_hint">mg/dl</string>
+    <string name="entry_details_carbs_field_hint">0g</string>
+    <string name="entry_details_insulin_field_hint">ui</string>
+    <string name="entry_details_physical_activity_field_hint">min.</string>
+    <string name="entry_time_field_title">Entry time:</string>
+    <string name="entry_time_format">%s %s</string>
+    <string name="entry_details_before_meal_option_label">Before meal</string>
+    <string name="entry_details_after_meal_option_label">After meal</string>
+    <string name="entry_details_moment_label">Entry moment</string>
+    <string name="entry_details_meal_type_label">Meal type</string>
+    <string name="entry_details_breakfast_label">Breakfast</string>
+    <string name="entry_details_lunch_label">Lunch</string>
+    <string name="entry_details_dinner_label">Dinner</string>
+    <string name="entry_details_snack_label">Snack</string>
+    <string name="entry_details_done_button_text">Done</string>
+</resources>

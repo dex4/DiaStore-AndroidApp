@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".EntryDetailsBinding">
+
+        <variable
+            name="viewModel"
+            type="com.diastore.feature.entrydetails.EntryDetailsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/toolbar_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_back"
+                app:titleTextColor="@color/colorPrimary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.diastore.feature.entrydetails.EntryDetailsField
+            android:id="@+id/blood_glucose_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:fieldDrawable="@drawable/ic_blood_glucose"
+            app:fieldName="@string/blood_sugar_level_label_text"
+            app:fieldValue="@={viewModel.bloodSugarLevel}"
+            app:fieldValueHint="@string/entry_details_blood_glucose_field_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+
+        <com.diastore.feature.entrydetails.EntryDetailsField
+            android:id="@+id/carbohydrates_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:fieldDrawable="@drawable/ic_carbohydrates"
+            app:fieldName="@string/carbs_label"
+            app:fieldValue="@={viewModel.carbohydratesIntake}"
+            app:fieldValueHint="@string/entry_details_carbs_field_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/blood_glucose_field" />
+
+        <com.diastore.feature.entrydetails.EntryDetailsField
+            android:id="@+id/insulin_intake_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:fieldDrawable="@drawable/ic_insulin"
+            app:fieldName="@string/insulin_label"
+            app:fieldValue="@={viewModel.insulinIntake}"
+            app:fieldValueHint="@string/entry_details_insulin_field_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/carbohydrates_field" />
+
+        <com.diastore.feature.entrydetails.EntryDetailsField
+            android:id="@+id/physical_activity_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:fieldDrawable="@drawable/ic_carbohydrates"
+            app:fieldName="@string/physical_activity_label"
+            app:fieldValue="@={viewModel.physicalActivityDuration}"
+            app:fieldValueHint="@string/entry_details_physical_activity_field_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/insulin_intake_field" />
+
+        <com.diastore.feature.entrydetails.EntryDetailsTimeField
+            android:id="@+id/entry_time_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:entryTime="@{viewModel.entryTime}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/physical_activity_field" />
+
+        <RadioGroup
+            android:id="@+id/entry_moment_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_gutter_half"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:entryMoment="@={viewModel.entryMomentSpecifier}"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/entry_moment_title">
+
+            <RadioButton
+                android:id="@+id/before"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/entry_details_radio_button_margin_vertical"
+                android:text="@string/entry_details_before_meal_option_label"
+                tools:checked="true" />
+
+            <RadioButton
+                android:id="@+id/after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_details_after_meal_option_label" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/meal_type_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_gutter"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:text="@string/entry_details_meal_type_label"
+            android:textAppearance="@style/Headline6"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/entry_time_field" />
+
+        <TextView
+            android:id="@+id/entry_moment_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_gutter"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:text="@string/entry_details_moment_label"
+            android:textAppearance="@style/Headline6"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/entry_time_field" />
+
+        <RadioGroup
+            android:id="@+id/meal_type_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_gutter_half"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/meal_type_title"
+            app:mealType="@={viewModel.mealTypeSpecifier}">
+
+            <RadioButton
+                android:id="@+id/breakfast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/entry_details_radio_button_margin_vertical"
+                android:text="@string/entry_details_breakfast_label" />
+
+            <RadioButton
+                android:id="@+id/lunch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/entry_details_radio_button_margin_vertical"
+                android:text="@string/entry_details_lunch_label" />
+
+            <RadioButton
+                android:id="@+id/dinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/entry_details_radio_button_margin_vertical"
+                android:text="@string/entry_details_dinner_label" />
+
+            <RadioButton
+                android:id="@+id/snack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_details_snack_label" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isDoneButtonEnabled}"
+            android:text="@string/entry_details_done_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/meal_type_group" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

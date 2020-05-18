@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class=".AboutBinding" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_layout_height"
+            android:background="@color/white"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:expandedTitleGravity="bottom"
+                app:expandedTitleMarginTop="@dimen/vertical_gutter"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:popupTheme="@style/AppTheme.ActionBar"
+                    app:title="@string/about" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Headline4.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/vertical_gutter"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorSecondaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/title_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:layout_width="@dimen/about_title_icon_size"
+                    android:layout_height="@dimen/about_title_icon_size"
+                    android:layout_marginEnd="@dimen/about_title_icon_margin_end"
+                    android:src="@drawable/diabetes"
+                    app:layout_constraintBottom_toBottomOf="@id/title"
+                    app:layout_constraintEnd_toStartOf="@id/title"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/title"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/about_app_description"
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/horizontal_margin"
+                    android:layout_marginTop="@dimen/vertical_gutter_double"
+                    android:layout_marginEnd="@dimen/horizontal_margin"
+                    android:text="@string/about_content"
+                    android:textColor="@color/colorSecondaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <TextView
+                    android:id="@+id/button_terms_and_conditions"
+                    style="@style/Headline6.Bold"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/wide_button_height"
+                    android:layout_marginTop="@dimen/vertical_gutter_double"
+                    android:background="?selectableItemBackground"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/horizontal_margin"
+                    android:text="@string/about_terms_and_conditions_title"
+                    android:textColor="@color/colorSecondaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/about_app_description" />
+
+                <TextView
+                    android:id="@+id/button_privacy_policy"
+                    style="@style/Headline6.Bold"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/wide_button_height"
+                    android:background="?selectableItemBackground"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/horizontal_margin"
+                    android:text="@string/about_privacy_policy"
+                    android:textColor="@color/colorSecondaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_terms_and_conditions" />
+
+                <ImageButton
+                    android:id="@+id/button_facebook"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="@dimen/about_social_button_size"
+                    android:layout_height="@dimen/about_social_button_size"
+                    android:layout_marginStart="@dimen/horizontal_margin"
+                    android:background="@drawable/fb"
+                    android:foreground="?selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="@id/button_twitter"
+                    app:layout_constraintEnd_toStartOf="@id/button_twitter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/button_twitter"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_twitter"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="@dimen/about_social_button_size"
+                    android:layout_height="@dimen/about_social_button_size"
+                    android:layout_marginTop="@dimen/vertical_gutter_double"
+                    android:background="@drawable/twitter"
+                    android:foreground="?selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/button_instagram"
+                    app:layout_constraintStart_toEndOf="@id/button_facebook"
+                    app:layout_constraintTop_toBottomOf="@id/button_privacy_policy"
+                    app:layout_constraintVertical_bias="0"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_instagram"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="@dimen/about_social_button_size"
+                    android:layout_height="@dimen/about_social_button_size"
+                    android:layout_marginEnd="@dimen/horizontal_margin"
+                    android:background="@drawable/insta"
+                    android:foreground="?selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="@id/button_twitter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/button_twitter"
+                    app:layout_constraintTop_toTopOf="@id/button_twitter"
+                    tools:ignore="ContentDescription" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
