@@ -9,9 +9,11 @@ protect the data stored in the local db.</p>
 <p>Above all, it is a project in which I will integrade everything<br>
 I know about Android development as I learn new things.</p>
 
-Up Next to be added:
-  - Local storage using Room
-  - Fingerprint encryption of stored data
-  - SignUp & OnBoarding
-  - User settings
-  - Connect the application to the API
+<h3>Up Next to be added:</h3>
+<ul>
+  <li>Local storage using Room</li>
+  <li>Fingerprint encryption of stored data</li>
+  <li>SignUp & OnBoarding</li>
+  <li>User settings</li>
+  <li>Connect the application to the API</li>
+</ul>
