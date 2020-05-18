@@ -8,3 +8,10 @@ DiaStore uses (To Be Implemented) fingerprint based encryption to<br>
 protect the data stored in the local db.</p>
 <p>Above all, it is a project in which I will integrade everything<br>
 I know about Android development as I learn new things.</p>
+
+Up Next to be added:
+  - Local storage using Room
+  - Fingerprint encryption of stored data
+  - SignUp & OnBoarding
+  - User settings
+  - Connect the application to the API
