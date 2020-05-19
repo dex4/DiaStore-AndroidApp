@@ -1,16 +1,20 @@
 package com.diastore.shared
 
+import androidx.room.Room
+import com.diastore.database.DiaStoreDataBase
 import com.diastore.feature.authentication.login.LoginViewModel
 import com.diastore.feature.authentication.signup.SignUpViewModel
 import com.diastore.feature.authentication.welcome.WelcomeViewModel
 import com.diastore.feature.entrydetails.EntryDetailsViewModel
 import com.diastore.feature.home.HomeViewModel
 import com.diastore.feature.settings.SettingsViewModel
+import com.diastore.repo.EntriesRepository
 import com.diastore.service.UserService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -20,9 +24,21 @@ val viewModels = module {
     single { LoginViewModel(get()) }
     single { WelcomeViewModel() }
     single { SignUpViewModel(get()) }
-    single { HomeViewModel() }
+    single { HomeViewModel(get()) }
     single { SettingsViewModel() }
     single { EntryDetailsViewModel() }
+}
+
+val repositories = module {
+    factory { EntriesRepository(get()) }
+    single {
+        Room.databaseBuilder(
+            androidApplication(),
+            DiaStoreDataBase::class.java,
+            "diastore_database"
+        ).fallbackToDestructiveMigration().build()
+    }
+    single { get<DiaStoreDataBase>().entriesDao() }
 }
 
 val networkModule = module {

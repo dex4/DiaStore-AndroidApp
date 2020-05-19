@@ -3,55 +3,59 @@ package com.diastore.feature.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.diastore.model.Entry
-import com.diastore.model.MealTypeSpecifier
-import com.diastore.model.MomentSpecifier
-import org.threeten.bp.LocalDateTime
+import com.diastore.repo.EntriesRepository
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val entriesRepository: EntriesRepository) : ViewModel() {
     private val _entries = MutableLiveData<List<Entry>>()
     val entries: LiveData<List<Entry>>
         get() = _entries
 
+    private val _isEntriesListRefreshing = MutableLiveData<Boolean>()
+    val isEntriesListRefreshing: LiveData<Boolean>
+        get() = _isEntriesListRefreshing
+
     init {
-        val initEntries = mutableListOf<Entry>()
-        repeat((1..3).count()) {
-            initEntries.add(
-                Entry(
-                    bloodSugarLevel = 100 + it,
-                    carbohydratesIntake = 45 + it,
-                    insulinIntake = 1F + it,
-                    entryTime = LocalDateTime.now(),
-                    physicalActivityDuration = 45 + it,
-                    mealTypeSpecifier = MealTypeSpecifier.LUNCH,
-                    entryMomentSpecifier = MomentSpecifier.BEFORE_MEAL
-                )
-            )
+        getEntries()
+    }
+
+    fun getEntries() {
+        viewModelScope.launch {
+            _entries.value = entriesRepository.getAllEntries()
+            _isEntriesListRefreshing.value = false
         }
-        _entries.value = initEntries.sortedDescending()
     }
 
     fun deleteEntry(entry: Entry) {
-        val tempEntries = _entries.value?.toMutableList() ?: mutableListOf()
-        tempEntries.removeIf {
-            it.id == entry.id
+        viewModelScope.launch {
+            val tempEntries = _entries.value?.toMutableList() ?: mutableListOf()
+            tempEntries.removeIf {
+                it.id == entry.id
+            }
+            entriesRepository.deleteEntry(entry.id)
+            _entries.value = tempEntries
         }
-        _entries.value = tempEntries
     }
 
     fun handleSelectedEntryChange(selectedEntry: Entry) {
-        val tempEntries = _entries.value?.toMutableList() ?: mutableListOf()
-        val containsEntry = tempEntries.find { it.id == selectedEntry.id }
-        if (containsEntry != null) {
-            tempEntries.forEachIndexed { index, entry ->
-                if (entry.id == selectedEntry.id) {
-                    tempEntries[index] = selectedEntry
-                    return@forEachIndexed
+        viewModelScope.launch {
+            val tempEntries = _entries.value?.toMutableList() ?: mutableListOf()
+            val containsEntry = tempEntries.find { it.id == selectedEntry.id }
+            if (containsEntry != null) {
+                tempEntries.forEachIndexed { index, entry ->
+                    if (entry.id == selectedEntry.id) {
+                        entriesRepository.updateEntry(selectedEntry)
+                        tempEntries[index] = selectedEntry
+                        return@forEachIndexed
+                    }
                 }
+            } else {
+                entriesRepository.addEntry(selectedEntry)
+                tempEntries.add(0, selectedEntry)
             }
-        } else {
-            tempEntries.add(0, selectedEntry)
+            _entries.value = tempEntries.sortedDescending()
         }
-        _entries.value = tempEntries.sortedDescending()
     }
 }

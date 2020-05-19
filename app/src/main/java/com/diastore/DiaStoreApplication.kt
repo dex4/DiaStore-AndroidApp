@@ -2,6 +2,7 @@ package com.diastore
 
 import android.app.Application
 import com.diastore.shared.networkModule
+import com.diastore.shared.repositories
 import com.diastore.shared.viewModels
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +15,7 @@ class DiaStoreApplication : Application() {
         AndroidThreeTen.init(this)
         startKoin {
             androidContext(this@DiaStoreApplication)
-            modules(listOf(networkModule, viewModels))
+            modules(listOf(networkModule, repositories, viewModels))
         }
     }
 }

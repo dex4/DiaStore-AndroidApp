@@ -52,6 +52,10 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_
             }
         })
 
+        binding.entriesSwipeRefreshLayout.setOnRefreshListener {
+            viewModel.getEntries()
+        }
+
         entryDetailsSharedViewModel.updatedEntry.observe(viewLifecycleOwner, Observer {
             viewModel.handleSelectedEntryChange(it)
         })

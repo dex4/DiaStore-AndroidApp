@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.diastore.model.Entry
 import com.diastore.model.MealTypeSpecifier
 import com.diastore.model.MomentSpecifier
-import org.threeten.bp.LocalDateTime
+import org.threeten.bp.OffsetDateTime
 import java.util.UUID
 
 class EntryDetailsViewModel : ViewModel() {
@@ -23,7 +23,7 @@ class EntryDetailsViewModel : ViewModel() {
     val carbohydratesIntake = MutableLiveData("")
     val insulinIntake = MutableLiveData("")
     val physicalActivityDuration = MutableLiveData("")
-    val entryTime = MutableLiveData<LocalDateTime>()
+    val entryTime = MutableLiveData<OffsetDateTime>()
     val entryMomentSpecifier = MutableLiveData<MomentSpecifier>()
     val mealTypeSpecifier = MutableLiveData<MealTypeSpecifier>()
     val isDoneButtonEnabled: LiveData<Boolean> = Transformations.map(bloodSugarLevel) {
@@ -37,7 +37,7 @@ class EntryDetailsViewModel : ViewModel() {
         carbohydratesIntake.value = _entry.value?.carbohydratesIntake?.toString() ?: ""
         insulinIntake.value = _entry.value?.insulinIntake?.toString() ?: ""
         physicalActivityDuration.value = _entry.value?.physicalActivityDuration?.toString() ?: ""
-        entryTime.value = _entry.value?.entryTime ?: LocalDateTime.now()
+        entryTime.value = _entry.value?.entryTime ?: OffsetDateTime.now()
         entryMomentSpecifier.value = _entry.value?.entryMomentSpecifier
         mealTypeSpecifier.value = _entry.value?.mealTypeSpecifier
     }
@@ -49,7 +49,7 @@ class EntryDetailsViewModel : ViewModel() {
             carbohydratesIntake = carbohydratesIntake.value?.toIntOrNull() ?: 0,
             insulinIntake = insulinIntake.value?.toFloatOrNull() ?: 0f,
             physicalActivityDuration = physicalActivityDuration.value?.toIntOrNull() ?: 0,
-            entryTime = entryTime.value ?: LocalDateTime.now(),
+            entryTime = entryTime.value ?: OffsetDateTime.now(),
             mealTypeSpecifier = mealTypeSpecifier.value,
             entryMomentSpecifier = entryMomentSpecifier.value,
             hasDonePhysicalActivity = !physicalActivityDuration.value.isNullOrEmpty()

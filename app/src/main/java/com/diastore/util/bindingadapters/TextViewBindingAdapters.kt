@@ -2,14 +2,12 @@ package com.diastore.util.bindingadapters
 
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.diastore.R
 import com.diastore.model.MealTypeSpecifier
 import com.diastore.model.MomentSpecifier
-import org.threeten.bp.LocalDateTime
+import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 
@@ -67,11 +65,6 @@ fun TextView.setUserHeight(height: Int) {
 }
 
 @BindingAdapter("entryTime")
-fun TextView.setEntryTime(entryTime: LocalDateTime) {
+fun TextView.setEntryTime(entryTime: OffsetDateTime) {
     text = entryTime.format(DateTimeFormatter.ofPattern("dd/MM/yy hh:mm", Locale.ENGLISH))
-}
-
-@BindingAdapter("isLoading")
-fun ProgressBar.setIsLoading(isLoading: Boolean) {
-    visibility = if (isLoading) View.VISIBLE else View.GONE
 }

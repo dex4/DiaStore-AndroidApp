@@ -26,7 +26,7 @@ fun RadioGroup.getEntryMoment(): MomentSpecifier? =
         else -> null
     }
 
-@BindingAdapter("app:entryMomentAttrChanged")
+@BindingAdapter("entryMomentAttrChanged")
 fun RadioGroup.setEntryMomentListeners(
     attrChange: InverseBindingListener
 ) {
@@ -56,7 +56,7 @@ fun RadioGroup.getMealType(): MealTypeSpecifier? =
         else -> null
     }
 
-@BindingAdapter("app:mealTypeAttrChanged")
+@BindingAdapter("mealTypeAttrChanged")
 fun RadioGroup.setMealTypeListeners(
     attrChange: InverseBindingListener
 ) {

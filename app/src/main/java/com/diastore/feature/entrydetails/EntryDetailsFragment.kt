@@ -11,6 +11,7 @@ import com.diastore.R
 import com.diastore.util.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDateTime
+import org.threeten.bp.OffsetDateTime
 
 class EntryDetailsFragment : BaseFragment<EntryDetailsBinding, EntryDetailsViewModel>(R.layout.fragment_entry_details) {
     override val viewModel by sharedViewModel<EntryDetailsViewModel>()
@@ -53,6 +54,6 @@ class EntryDetailsFragment : BaseFragment<EntryDetailsBinding, EntryDetailsViewM
     }
 
     private fun setEntryTime(year: Int, month: Int, day: Int, hour: Int, minute: Int) {
-        viewModel.entryTime.value = LocalDateTime.of(year, month, day, hour, minute)
+        viewModel.entryTime.value = OffsetDateTime.of(year, month, day, hour, minute, 0, 0, OffsetDateTime.now().offset)
     }
 }
