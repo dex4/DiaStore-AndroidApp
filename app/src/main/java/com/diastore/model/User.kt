@@ -21,5 +21,3 @@ data class User(
     @Transient
     val age: Int = 24
 ) : Parcelable
-
-//"0001-01-01T00:00:00"

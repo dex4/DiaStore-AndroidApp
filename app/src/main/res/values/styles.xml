@@ -106,6 +106,7 @@
 
     <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:minWidth">240dp</item>
+        <item name="android:minHeight">56dp</item>
     </style>
 
     <style name="StyledTilEditTextTheme">

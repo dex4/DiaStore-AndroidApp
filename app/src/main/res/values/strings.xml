@@ -22,7 +22,8 @@
     <string name="sign_up_last_name_hint">Last name</string>
     <string name="sign_up_email_hint">Email</string>
     <string name="sign_up_password_hint">Password</string>
-    <string name="sign_up_text_bottom">Already have an account?</string>
+    <string name="sign_up_already_registered_text">Already have an account? LogIn</string>
+    <string name="sign_up_already_registered_login_text">LogIn</string>
     <string name="sign_up_log_in_bottom">Log In</string>
     <!--endregion-->
 
