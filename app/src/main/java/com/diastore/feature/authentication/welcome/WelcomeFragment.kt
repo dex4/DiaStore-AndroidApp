@@ -16,7 +16,7 @@ class WelcomeFragment : BaseFragment<WelcomeBinding, WelcomeViewModel>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!SharedPreferencesManager(activity as DiaStoreActivity).getCurrentUser()?.id.isNullOrEmpty()) {
+        if (SharedPreferencesManager(activity as DiaStoreActivity).getCurrentUser() != null) {
             findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToMainNavigation())
         }
     }

@@ -6,12 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.diastore.model.Entry
+import com.diastore.model.User
 
-@Database(entities = [Entry::class], version = 1, exportSchema = false)
+@Database(entities = [Entry::class, User::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class DiaStoreDataBase : RoomDatabase() {
 
     abstract fun entriesDao(): EntriesDao
+    abstract fun usersDao(): UserDao
 
     companion object {
         @Volatile

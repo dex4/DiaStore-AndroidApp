@@ -3,10 +3,13 @@ package com.diastore.feature.authentication.signup
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.diastore.DiaStoreActivity
 import com.diastore.OnBoardingBinding
 import com.diastore.R
 import com.diastore.util.BaseFragment
+import com.diastore.util.SharedPreferencesManager
 import com.diastore.util.displayIntPickerBottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -19,6 +22,15 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.buttonConfirm.setOnClickListener {
+            viewModel.addUser()
+        }
+
+        viewModel.user.observe(viewLifecycleOwner, Observer {
+            SharedPreferencesManager(activity as DiaStoreActivity).saveCurrentUser(it)
+            findNavController().navigate(OnBoardingFragmentDirections.actionAboutYouFragmentToMainNavigation())
+        })
 
         binding.ageField.setOnClickListener {
             displayIntPickerBottomSheetDialog(

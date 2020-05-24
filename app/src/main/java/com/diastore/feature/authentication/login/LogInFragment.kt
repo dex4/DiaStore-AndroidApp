@@ -25,16 +25,16 @@ class LogInFragment : BaseFragment<LoginBinding, LoginViewModel>(R.layout.fragme
 //            viewModel.login()
             SharedPreferencesManager(activity as DiaStoreActivity).saveCurrentUser(
                 User(
-                    UUID.randomUUID().toString(),
+                    UUID.randomUUID(),
                     "John",
                     "Doe",
                     "john.doe@mail.com",
                     "Password1",
                     170,
                     58,
-                    15.0,
-                    50.0,
-                    "10/10/1997"
+                    15,
+                    50,
+                    24
                 )
             )
             findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToMainNavigation())
