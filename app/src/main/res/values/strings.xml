@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">DiaStore</string>
 
     <!--region Welcome-->
@@ -53,7 +53,6 @@
     <string name="settings_glucose_to_ins_temp">50:1</string>
     <string name="settings_change_pass_string">Change Password</string>
     <string name="settings_log_out_string">LogOut</string>
-    <string name="settings_weight_template">%s kg</string>
     <!--endregion-->
 
     <!--region Home-->
@@ -94,7 +93,6 @@
     <string name="carbs_to_insulin_hint">Carbs to insulin ratio</string>
     <string name="bloodsugar_to_insulin_hint">Bloodsugar to insulin ratio</string>
     <string name="confirm">Confirm</string>
-    <string name="settings_height_template">%s cm</string>
 
     <!--region Entry-->
     <string name="entry_glucose_level">%dmg/dl</string>
@@ -106,7 +104,6 @@
     <string name="entry_details_insulin_field_hint">ui</string>
     <string name="entry_details_physical_activity_field_hint">min.</string>
     <string name="entry_time_field_title">Entry time:</string>
-    <string name="entry_time_format">%s %s</string>
     <string name="entry_details_before_meal_option_label">Before meal</string>
     <string name="entry_details_after_meal_option_label">After meal</string>
     <string name="entry_details_moment_label">Entry moment</string>
@@ -116,4 +113,21 @@
     <string name="entry_details_dinner_label">Dinner</string>
     <string name="entry_details_snack_label">Snack</string>
     <string name="entry_details_done_button_text">Done</string>
+
+    <!--region Profile-->
+    <string name="profile_bottom_sheet_dialog_age_title">Age</string>
+    <string name="profile_bottom_sheet_dialog_weight_title">Weight</string>
+    <string name="profile_bottom_sheet_dialog_height_title">Height</string>
+    <string name="profile_bottom_sheet_dialog_carbs_title">Carbs to insulin</string>
+    <string name="profile_bottom_sheet_dialog_blood_sugar_title">Blood sugar to insulin</string>
+    <string name="profile_bottom_sheet_dialog_confirm_button_text" tools:ignore="ButtonCase,Typos">Ok</string>
+    <string name="profile_bottom_sheet_dialog_cancel_button_text">Cancel</string>
+    <plurals name="profile_age_format">
+        <item quantity="one">%d yr.</item>
+        <item quantity="other">%d yrs.</item>
+    </plurals>
+    <string name="profile_weight_format">%d kg</string>
+    <string name="profile_height_format">%d cm</string>
+    <string name="profile_carbs_format">%d ch</string>
+    <string name="profile_blood_sugar_format">%d mg/dl</string>
 </resources>

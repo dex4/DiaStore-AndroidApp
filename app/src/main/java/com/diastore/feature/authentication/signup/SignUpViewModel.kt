@@ -12,11 +12,11 @@ class SignUpViewModel(private val userService: UserService) : ViewModel() {
     val lastName = MutableLiveData<String>("")
     val email = MutableLiveData<String>("")
     val password = MutableLiveData<String>("")
-    val age = MutableLiveData<String>("")
-    val weight = MutableLiveData<String>("")
-    val height = MutableLiveData<String>("")
-    val carbsToInsulin = MutableLiveData<String>("")
-    val bloodSugarToInsulin = MutableLiveData<String>("")
+    val age = MutableLiveData<Int>()
+    val weight = MutableLiveData<Int>()
+    val height = MutableLiveData<Int>()
+    val carbsToInsulinUnit = MutableLiveData<Int>()
+    val bloodSugarInsulinUnit = MutableLiveData<Int>()
 
     private val _signUpResponse = MutableLiveData<User>()
     val signUpResponse: LiveData<User>

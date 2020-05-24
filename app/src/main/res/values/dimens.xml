@@ -16,10 +16,14 @@
     <!--region LogIn-->
     <dimen name="login_button_margin_vertical">24dp</dimen>
 
+    <!--region SignUp-->
+    <dimen name="sign_up_name_input_separation_margin">4dp</dimen>
+
     <!--region Welcome-->
     <dimen name="welcome_logo_width">200dp</dimen>
     <dimen name="welcome_title_margin_top">64dp</dimen>
     <dimen name="welcome_logo_margin_top">72dp</dimen>
+    <dimen name="welcome_login_button_width">240dp</dimen>
 
     <!--region About-->
     <dimen name="about_title_icon_size">36dp</dimen>
@@ -47,6 +51,11 @@
     <dimen name="entry_details_radio_button_corner_radius">4dp</dimen>
     <dimen name="entry_details_radio_button_stroke_width">1dp</dimen>
     <dimen name="entry_details_radio_button_margin_vertical">2dp</dimen>
-    <dimen name="sign_up_name_input_separation_margin">4dp</dimen>
+
+    <!--region User Profile-->
+    <dimen name="profile_bottom_sheet_dialog_height">240dp</dimen>
+    <dimen name="profile_bottom_sheet_dialog_button_height">48dp</dimen>
+    <dimen name="profile_field_separator_height">1dp</dimen>
+    <dimen name="profile_field_height">64dp</dimen>
 
 </resources>

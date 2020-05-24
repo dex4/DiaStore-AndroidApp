@@ -76,7 +76,7 @@
     <include app:graph="@navigation/main_navigation" />
     <fragment
         android:id="@+id/aboutYouFragment"
-        android:name="com.diastore.feature.authentication.signup.AboutYouFragment"
+        android:name="com.diastore.feature.authentication.signup.OnBoardingFragment"
         android:label="AboutYouFragment"
         tools:layout="@layout/fragment_onboarding">
         <action

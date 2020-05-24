@@ -9,6 +9,7 @@
         <item name="materialButtonStyle">@style/DiaStoreButton</item>
         <item name="textInputStyle">@style/StyledTilEditTextTheme</item>
         <item name="radioButtonStyle">@style/FilledRadioButton</item>
+        <item name="bottomSheetDialogTheme">@style/RoundedBottomSheetDialogTheme</item>
     </style>
 
     <style name="SplashScreenTheme" parent="AppTheme">
@@ -105,8 +106,9 @@
     </style>
 
     <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:minWidth">240dp</item>
         <item name="android:minHeight">56dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:enabled">true</item>
     </style>
 
     <style name="StyledTilEditTextTheme">
@@ -125,5 +127,20 @@
         <item name="android:button">@color/transparent_white</item>
         <item name="android:textAppearance">@style/Subtitle2</item>
     </style>
+
+    <style name="RoundedBottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_rounded_corners</item>
+
+    </style>
+
+    <style name="RoundedBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RoundedBottomSheet</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="buttonStyle">@style/TextButton</item>
+    </style>
+
+    <style name="RoundedBottomSheetDialogTheme" parent="RoundedBottomSheetDialog" />
     <!--endregion-->
 </resources>

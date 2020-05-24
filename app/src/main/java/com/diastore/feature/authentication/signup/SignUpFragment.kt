@@ -45,7 +45,7 @@ class SignUpFragment : BaseFragment<SignUpBinding, SignUpViewModel>(R.layout.fra
                     override fun updateDrawState(ds: TextPaint) {
                         ds.typeface = Typeface.DEFAULT_BOLD
                         ds.isUnderlineText = true
-                        ds.color = resources.getColor(R.color.colorPrimaryDark, null)
+                        ds.color = resources.getColor(R.color.colorPrimary, null)
                     }
                 },
                 alreadyRegisteredText.indexOf(alreadyRegisteredLogInText),

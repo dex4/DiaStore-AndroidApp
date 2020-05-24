@@ -11,12 +11,13 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="@dimen/app_bar_layout_height"
             android:background="@color/white"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.ActionBar">
@@ -45,120 +46,64 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:overScrollMode="always"
+            android:overScrollMode="never"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/age_input_layout"
-                    style="@style/Widget.Design.TextInputLayout"
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/age_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/horizontal_margin"
-                    android:layout_marginTop="@dimen/vertical_gutter"
-                    app:layout_constraintEnd_toStartOf="@id/height_input_layout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/age"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/age_hint"
-                        android:inputType="number"
-                        android:text="@={viewModel.age}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/weight_input_layout"
-                    style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/horizontal_margin"
-                    android:layout_marginTop="@dimen/vertical_gutter"
-                    app:layout_constraintEnd_toStartOf="@id/height_input_layout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/age_input_layout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/weight_hint"
-                        android:inputType="number"
-                        android:text="@={viewModel.weight}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/height_input_layout"
-                    style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/horizontal_margin"
-                    app:layout_constraintBottom_toBottomOf="@id/weight_input_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/weight_input_layout"
-                    app:layout_constraintTop_toTopOf="@id/weight_input_layout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/height"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/height_hint"
-                        android:inputType="number"
-                        android:text="@={viewModel.height}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/carbs_to_insulin_input_layout"
-                    style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/horizontal_margin"
-                    android:layout_marginTop="@dimen/vertical_gutter"
-                    android:layout_marginEnd="@dimen/horizontal_margin"
+                    app:age="@{viewModel.age}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/weight_input_layout">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:profileFieldName="Age" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/carbs_to_insulin"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/carbs_to_insulin_hint"
-                        android:inputType="numberDecimal"
-                        android:text="@={viewModel.carbsToInsulin}" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/bloodsugar_to_insulin_input_layout"
-                    style="@style/Widget.Design.TextInputLayout"
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/weight_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/horizontal_margin"
-                    android:layout_marginTop="@dimen/vertical_gutter"
-                    android:layout_marginEnd="@dimen/horizontal_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/carbs_to_insulin_input_layout">
+                    app:layout_constraintTop_toBottomOf="@id/age_field"
+                    app:profileFieldName="Weight"
+                    app:weight="@{viewModel.weight}" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/bloodsugar_to_insulin"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/bloodsugar_to_insulin_hint"
-                        android:inputType="numberDecimal"
-                        android:text="@={viewModel.bloodSugarToInsulin}" />
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/height_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:height="@{viewModel.height}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weight_field"
+                    app:profileFieldName="Height" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/carbs_to_insulin_unit_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:carbsToInsulinUnit="@{viewModel.carbsToInsulinUnit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/height_field"
+                    app:profileFieldName="@string/profile_bottom_sheet_dialog_carbs_title" />
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/blood_sugar_insulin_unit_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:bloodSugarToInsulinUnit="@{viewModel.bloodSugarInsulinUnit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/carbs_to_insulin_unit_field"
+                    app:profileFieldName="@string/profile_bottom_sheet_dialog_blood_sugar_title" />
 
 
                 <Button
@@ -167,9 +112,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/vertical_gutter_double"
                     android:text="@string/confirm"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bloodsugar_to_insulin_input_layout" />
+                    app:layout_constraintTop_toBottomOf="@id/blood_sugar_insulin_unit_field" />
 
                 <ProgressBar
                     android:id="@+id/progress_indicator"

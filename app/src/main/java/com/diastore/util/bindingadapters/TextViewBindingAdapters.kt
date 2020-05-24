@@ -11,22 +11,6 @@ import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 
-
-@BindingAdapter("carbs")
-fun TextView.setCarbs(carbs: Int) {
-    text = context.getString(R.string.carbs_template, carbs)
-}
-
-@BindingAdapter("insulin")
-fun TextView.setInsulin(insulin: Float) {
-    text = context.getString(R.string.insulin_template, insulin)
-}
-
-@BindingAdapter("sport")
-fun TextView.setPhysicalActivity(sport: Int) {
-    text = context.getString(R.string.sport_template, sport)
-}
-
 @BindingAdapter("glucoseLevel")
 fun TextView.setGlucoseLevel(glucoseLevel: Int) {
     val formattedGlucoseLevelText = context.getString(R.string.entry_glucose_level, glucoseLevel)
@@ -52,16 +36,6 @@ fun TextView.setMealMomentText(momentType: MomentSpecifier?, mealType: MealTypeS
         null -> ""
     }
     text = mealMoment
-}
-
-@BindingAdapter("weight")
-fun TextView.setWeight(weight: Int) {
-    text = context.getString(R.string.settings_weight_template, weight.toString())
-}
-
-@BindingAdapter("height")
-fun TextView.setUserHeight(height: Int) {
-    text = context.getString(R.string.settings_height_template, height.toString())
 }
 
 @BindingAdapter("entryTime")
