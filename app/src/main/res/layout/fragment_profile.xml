@@ -7,13 +7,157 @@
 
         <variable
             name="viewModel"
-            type="com.diastore.feature.settings.SettingsViewModel" />
+            type="com.diastore.feature.settings.ProfileViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_layout_height"
+            android:background="@color/white"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.ActionBar">
 
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:expandedTitleGravity="bottom"
+                app:expandedTitleMarginTop="@dimen/vertical_gutter"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:popupTheme="@style/AppTheme.ActionBar"
+                    app:title="@string/profile_title" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/name_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:firstName="@{viewModel.firstName}"
+                    app:lastName="@{viewModel.lastName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:profileFieldName="@string/profile_field_label_name" />
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/email_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name_field"
+                    app:profileFieldName="@string/profile_field_label_email"
+                    app:profileFieldValue="@{viewModel.email}" />
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/age_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:age="@{viewModel.age}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_field"
+                    app:profileFieldName="@string/profile_field_label_age" />
+
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/weight_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/age_field"
+                    app:profileFieldName="@string/profile_field_label_weeight"
+                    app:weight="@{viewModel.weight}" />
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/height_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:height="@{viewModel.height}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weight_field"
+                    app:profileFieldName="@string/profile_field_label_height" />
+
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/carbs_to_insulin_unit_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:carbsToInsulinUnit="@{viewModel.carbsToInsulinUnit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/height_field"
+                    app:profileFieldName="@string/profile_field_label_carbs_to_insulin" />
+
+                <com.diastore.feature.authentication.signup.ProfileDetailsField
+                    android:id="@+id/blood_sugar_insulin_unit_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:bloodSugarToInsulinUnit="@{viewModel.bloodSugarInsulinUnit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/carbs_to_insulin_unit_field"
+                    app:profileFieldName="@string/profile_field_label_bloodsugar_to_insulin" />
+
+                <include
+                    android:id="@+id/button_log_out"
+                    layout="@layout/layout_profile_log_out_field"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_field_height"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/blood_sugar_insulin_unit_field" />
+
+
+                <Button
+                    android:id="@+id/button_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/vertical_gutter"
+                    android:text="@string/profile_button_done"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_log_out" />
+
+                <ProgressBar
+                    android:id="@+id/progress_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:isVisible="@{viewModel.isLoading}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

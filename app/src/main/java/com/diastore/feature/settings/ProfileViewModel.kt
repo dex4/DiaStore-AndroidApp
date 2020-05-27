@@ -1,29 +1,27 @@
-package com.diastore.feature.authentication.signup
+package com.diastore.feature.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diastore.model.User
+import com.diastore.repo.EntriesRepository
 import com.diastore.repo.UserRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() {
+class ProfileViewModel(private val userRepository: UserRepository, private val entriesRepository: EntriesRepository) : ViewModel() {
 
     val firstName = MutableLiveData("")
     val lastName = MutableLiveData("")
     val email = MutableLiveData("")
-    val password = MutableLiveData("")
     val age = MutableLiveData<Int>()
     val weight = MutableLiveData<Int>()
     val height = MutableLiveData<Int>()
     val carbsToInsulinUnit = MutableLiveData<Int>()
     val bloodSugarInsulinUnit = MutableLiveData<Int>()
-
-    private val _signUpResponse = MutableLiveData<User>()
-    val signUpResponse: LiveData<User>
-        get() = _signUpResponse
 
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean>
@@ -33,7 +31,45 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
     val user: LiveData<User>
         get() = _user
 
+    fun updateUser(userId: String) {
+        viewModelScope.launch {
+            val user = createUser(
+                UUID.fromString(userId),
+                firstName.value,
+                lastName.value,
+                email.value,
+                age.value,
+                weight.value,
+                height.value,
+                carbsToInsulinUnit.value,
+                bloodSugarInsulinUnit.value
+            )
+            user?.let {
+                userRepository.updateUser(user)
+                _user.value = user
+            }
+        }
+    }
+
+    fun getUser() {
+        viewModelScope.launch {
+            setUserDetails(userRepository.getUser())
+        }
+    }
+
+    private fun setUserDetails(user: User) {
+        firstName.value = user.firstName
+        lastName.value = user.lastName
+        email.value = user.email
+        height.value = user.height
+        weight.value = user.weight
+        age.value = user.age
+        carbsToInsulinUnit.value = user.carbsToInsulinRatio
+        bloodSugarInsulinUnit.value = user.bloodGlucoseToInsulinRatio
+    }
+
     private fun createUser(
+        userId: UUID,
         firstName: String?,
         lastName: String?,
         email: String?,
@@ -49,7 +85,7 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
             null
         } else {
             User(
-                UUID.randomUUID(),
+                userId,
                 firstName,
                 lastName,
                 email,
@@ -62,24 +98,10 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
             )
         }
 
-
-    fun addUser() {
-        viewModelScope.launch {
-            val user = createUser(
-                firstName.value,
-                lastName.value,
-                email.value,
-                age.value,
-                weight.value,
-                height.value,
-                carbsToInsulinUnit.value,
-                bloodSugarInsulinUnit.value
-            )
-            user?.let {
-                userRepository.addUser(user)
-                _user.value = user
-            }
+    fun clearUserData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            entriesRepository.deleteAllEntries()
+            userRepository.deleteUser()
         }
     }
-
 }

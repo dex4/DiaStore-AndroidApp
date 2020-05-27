@@ -23,4 +23,7 @@ interface EntriesDao {
 
     @Query("SELECT * FROM entries ORDER BY entryTime DESC")
     suspend fun getAllEntries(): List<Entry>
+
+    @Query("delete from entries")
+    suspend fun deleteAll()
 }

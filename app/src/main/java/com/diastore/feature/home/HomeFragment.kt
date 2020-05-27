@@ -28,8 +28,12 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_
 
         binding.navView.setupWithNavController(findNavController())
         DrawerHeaderBinding.bind(binding.navView.getHeaderView(0)).apply {
-            val user = SharedPreferencesManager(activity as DiaStoreActivity).getCurrentUser()
-            userName = getString(R.string.home_drawer_user_name, user?.firstName, user?.lastName)
+            val sharedPreferencesManager = SharedPreferencesManager(activity as DiaStoreActivity)
+            userName = getString(
+                R.string.drawer_user_name_format,
+                sharedPreferencesManager.getUserFirstName(),
+                sharedPreferencesManager.getUserLastName()
+            )
         }
 
         binding.entriesRecycler.adapter = adapter.apply {
@@ -67,7 +71,9 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.challenges -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChallengesFragment())
-                R.id.settings -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
+                R.id.settings -> {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
+                }
                 R.id.about -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAboutFragment())
                 R.id.statistics -> Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
             }

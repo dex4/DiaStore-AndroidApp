@@ -23,4 +23,8 @@ class EntriesRepository(private val entriesDao: EntriesDao) {
     suspend fun getEntryById(entryId: UUID) {
         entriesDao.getEntryById(entryId.toString())
     }
+
+    suspend fun deleteAllEntries() {
+        entriesDao.deleteAll()
+    }
 }

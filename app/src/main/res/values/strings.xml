@@ -7,7 +7,7 @@
     <!--endregion-->
 
     <!--region Login-->
-    <string name="login_button_text">Log In</string>
+    <string name="log_in_button_text">Log In</string>
     <string name="log_in_subtitle">We’re happy to see you back!</string>
     <string name="log_in_email_hint">Email</string>
     <string name="log_in_password_hint">Password</string>
@@ -34,30 +34,9 @@
     <string name="about_privacy_policy">Privacy Policy</string>
     <!--endregion-->
 
-    <!--region Settings-->
-    <string name="settings">Profile</string>
-    <string name="view_settings">view settings</string>
-    <string name="settings_name_string">Name</string>
-    <string name="settings_email_string">Email</string>
-    <string name="settings_weight_string">Weight</string>
-    <string name="settings_name_temp">John Doe</string>
-    <string name="settings_email_temp">johndoe@gmail.com</string>
-    <string name="settings_weight_temp">75 kg</string>
-    <string name="settings_height_string">Height</string>
-    <string name="settings_height_temp">175 cm</string>
-    <string name="settings_age_string">Age</string>
-    <string name="settings_age_temp">21</string>
-    <string name="settings_carbs_to_ins_string">Carbs to one insulin unit</string>
-    <string name="settings_carbs_to_ins_temp">20:1</string>
-    <string name="settings_glucose_to_ins_string">Blood glucose to one insulin unit</string>
-    <string name="settings_glucose_to_ins_temp">50:1</string>
-    <string name="settings_change_pass_string">Change Password</string>
-    <string name="settings_log_out_string">LogOut</string>
-    <!--endregion-->
-
     <!--region Home-->
-    <string name="home">Home</string>
-    <string name="home_drawer_user_name">%s %s</string>
+    <string name="home_title">Home</string>
+    <string name="drawer_user_name_format">%s %s</string>
     <string name="drawer_food_item_title">Food</string>
     <string name="drawer_physical_item_title">Physical Activities</string>
     <string name="drawer_challenges_item_title">Challenges</string>
@@ -86,13 +65,11 @@
     <string name="carbs_label">Carbs:</string>
     <string name="insulin_label">Insulin intake:</string>
     <string name="physical_activity_label">Activity duration:</string>
-    <string name="on_boarding">About You</string>
     <string name="age_hint">Age</string>
     <string name="weight_hint">Weight</string>
     <string name="height_hint">Height</string>
     <string name="carbs_to_insulin_hint">Carbs to insulin ratio</string>
     <string name="bloodsugar_to_insulin_hint">Bloodsugar to insulin ratio</string>
-    <string name="confirm">Confirm</string>
 
     <!--region Entry-->
     <string name="entry_glucose_level">%dmg/dl</string>
@@ -114,6 +91,10 @@
     <string name="entry_details_snack_label">Snack</string>
     <string name="entry_details_done_button_text">Done</string>
 
+    <!--region OnBoarding-->
+    <string name="on_boarding_title">About You</string>
+    <string name="on_boarding_button_confirm">Confirm</string>
+
     <!--region Profile-->
     <string name="profile_bottom_sheet_dialog_age_title">Age</string>
     <string name="profile_bottom_sheet_dialog_weight_title">Weight</string>
@@ -126,8 +107,19 @@
         <item quantity="one">%d yr.</item>
         <item quantity="other">%d yrs.</item>
     </plurals>
+    <string name="profile_title">Profile</string>
     <string name="profile_weight_format">%d kg</string>
     <string name="profile_height_format">%d cm</string>
     <string name="profile_carbs_format">%d ch</string>
     <string name="profile_blood_sugar_format">%d mg/dl</string>
+    <string name="profile_user_name_format">%s %s</string>
+    <string name="profile_field_label_name">Name</string>
+    <string name="profile_field_label_email">Email</string>
+    <string name="profile_field_label_age">Age</string>
+    <string name="profile_field_label_weeight">Weight</string>
+    <string name="profile_field_label_height">Height</string>
+    <string name="profile_field_label_carbs_to_insulin">Carbs to insulin</string>
+    <string name="profile_field_label_bloodsugar_to_insulin">Bloodsugar to insulin</string>
+    <string name="profile_field_label_log_out">Log Out</string>
+    <string name="profile_button_done">Done</string>
 </resources>

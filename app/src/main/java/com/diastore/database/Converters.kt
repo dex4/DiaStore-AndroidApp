@@ -3,10 +3,8 @@ package com.diastore.database
 import androidx.room.TypeConverter
 import com.diastore.model.MealTypeSpecifier
 import com.diastore.model.MomentSpecifier
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.Locale
 import java.util.UUID
 
 object Converters {
@@ -33,17 +31,6 @@ object Converters {
     @TypeConverter
     @JvmStatic
     fun toUUID(id: String): UUID = UUID.fromString(id)
-
-    @TypeConverter
-    @JvmStatic
-    fun fromLocalDateTime(localDateTime: LocalDateTime): String =
-        localDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yy hh:mm", Locale.ENGLISH))
-
-    @TypeConverter
-    @JvmStatic
-    fun toLocalDateTime(dateTimeString: String): LocalDateTime =
-        LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd/MM/yy hh:mm", Locale.ENGLISH))
-
 
     @TypeConverter
     @JvmStatic

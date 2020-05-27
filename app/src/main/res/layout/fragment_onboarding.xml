@@ -37,7 +37,7 @@
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_back"
                     app:popupTheme="@style/AppTheme.ActionBar"
-                    app:title="@string/on_boarding" />
+                    app:title="@string/on_boarding_title" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -61,7 +61,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:profileFieldName="Age" />
+                    app:profileFieldName="@string/profile_field_label_age" />
 
 
                 <com.diastore.feature.authentication.signup.ProfileDetailsField
@@ -71,7 +71,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/age_field"
-                    app:profileFieldName="Weight"
+                    app:profileFieldName="@string/profile_field_label_weeight"
                     app:weight="@{viewModel.weight}" />
 
                 <com.diastore.feature.authentication.signup.ProfileDetailsField
@@ -82,7 +82,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/weight_field"
-                    app:profileFieldName="Height" />
+                    app:profileFieldName="@string/profile_field_label_height" />
 
 
                 <com.diastore.feature.authentication.signup.ProfileDetailsField
@@ -93,7 +93,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/height_field"
-                    app:profileFieldName="@string/profile_bottom_sheet_dialog_carbs_title" />
+                    app:profileFieldName="@string/profile_field_label_carbs_to_insulin" />
 
                 <com.diastore.feature.authentication.signup.ProfileDetailsField
                     android:id="@+id/blood_sugar_insulin_unit_field"
@@ -103,7 +103,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/carbs_to_insulin_unit_field"
-                    app:profileFieldName="@string/profile_bottom_sheet_dialog_blood_sugar_title" />
+                    app:profileFieldName="@string/profile_field_label_bloodsugar_to_insulin" />
 
 
                 <Button
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/vertical_gutter_double"
-                    android:text="@string/confirm"
+                    android:text="@string/on_boarding_button_confirm"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

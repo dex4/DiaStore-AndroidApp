@@ -28,7 +28,11 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
         }
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            SharedPreferencesManager(activity as DiaStoreActivity).saveCurrentUser(it)
+            SharedPreferencesManager(activity as DiaStoreActivity).saveUser(
+                it.id.toString(),
+                it.firstName,
+                it.lastName
+            )
             findNavController().navigate(OnBoardingFragmentDirections.actionAboutYouFragmentToMainNavigation())
         })
 

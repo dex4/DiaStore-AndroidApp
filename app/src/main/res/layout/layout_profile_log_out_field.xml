@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".LogOutButtonBinding" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_field_height"
+        android:background="?selectableItemBackground"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/horizontal_margin"
+        android:text="@string/profile_field_label_log_out"
+        android:drawableEnd="@drawable/ic_exit"
+        android:drawableTint="@color/colorPrimary"
+        android:textAppearance="@style/Body1.Bold"
+        android:textColor="@color/colorPrimary" />
+</layout>
