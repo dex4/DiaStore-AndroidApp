@@ -4,6 +4,8 @@
     package="com.diastore">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
     <application
         android:name=".DiaStoreApplication"
         android:allowBackup="true"
@@ -17,7 +19,6 @@
         <activity android:name=".DiaStoreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

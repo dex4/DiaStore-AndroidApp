@@ -15,27 +15,35 @@ import java.util.Locale
 fun TextView.setGlucoseLevel(glucoseLevel: Int) {
     val formattedGlucoseLevelText = context.getString(R.string.entry_glucose_level, glucoseLevel)
     text = SpannableString(formattedGlucoseLevelText).apply {
-        setSpan(RelativeSizeSpan(1f), 0, glucoseLevel.toString().length - 1, 0) // set size
-        setSpan(RelativeSizeSpan(0.4f), glucoseLevel.toString().length, formattedGlucoseLevelText.length, 0) // set color
+        setSpan(RelativeSizeSpan(1f), 0, glucoseLevel.toString().length - 1, 0)
+        setSpan(RelativeSizeSpan(0.4f), glucoseLevel.toString().length, formattedGlucoseLevelText.length, 0)
     }
 }
 
 @BindingAdapter("momentType", "mealType", requireAll = false)
 fun TextView.setMealMomentText(momentType: MomentSpecifier?, mealType: MealTypeSpecifier?) {
-    var mealMoment =
+    val mealMoment =
         when (momentType) {
-            MomentSpecifier.BEFORE_MEAL -> context.getString(R.string.moment_before)
-            MomentSpecifier.AFTER_MEAL -> context.getString(R.string.moment_after)
+            MomentSpecifier.BEFORE_MEAL -> context.getString(R.string.entry_moment_type_before)
+            MomentSpecifier.AFTER_MEAL -> context.getString(R.string.entry_moment_type_after)
             else -> ""
         }
-    mealMoment += when (mealType) {
-        MealTypeSpecifier.BREAKFAST -> "Breakfast"
-        MealTypeSpecifier.LUNCH -> "Lunch"
-        MealTypeSpecifier.DINNER -> "Dinner"
-        MealTypeSpecifier.SNACK -> "Snack"
-        null -> ""
+    val meal = when (mealType) {
+        MealTypeSpecifier.BREAKFAST -> context.getString(R.string.entry_meal_type_display_breakfast)
+        MealTypeSpecifier.LUNCH -> context.getString(R.string.entry_meal_type_display_lunch)
+        MealTypeSpecifier.DINNER -> context.getString(R.string.entry_meal_type_display_dinner)
+        MealTypeSpecifier.SNACK -> context.getString(R.string.entry_meal_type_display_snack)
+        else -> ""
     }
-    text = mealMoment
+    text = if (mealMoment.isNotEmpty() && meal.isNotEmpty()) {
+        mealMoment + meal
+    } else if (mealMoment.isNotEmpty() && meal.isEmpty()) {
+        mealMoment + context.getString(R.string.entry_meal_type_display_none)
+    } else if (mealMoment.isEmpty()) {
+        meal
+    } else {
+        ""
+    }
 }
 
 @BindingAdapter("entryTime")

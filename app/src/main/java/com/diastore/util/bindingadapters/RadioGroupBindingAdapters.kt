@@ -14,7 +14,7 @@ fun RadioGroup.selectEntryMoment(entryMomentSpecifier: MomentSpecifier?) {
     when (entryMomentSpecifier) {
         MomentSpecifier.BEFORE_MEAL -> this.check(R.id.before)
         MomentSpecifier.AFTER_MEAL -> this.check(R.id.after)
-        null -> this.clearCheck()
+        else -> this.clearCheck()
     }
 }
 
@@ -23,7 +23,7 @@ fun RadioGroup.getEntryMoment(): MomentSpecifier? =
     when (checkedRadioButtonId) {
         R.id.before -> MomentSpecifier.BEFORE_MEAL
         R.id.after -> MomentSpecifier.AFTER_MEAL
-        else -> null
+        else -> MomentSpecifier.NONE
     }
 
 @BindingAdapter("entryMomentAttrChanged")
@@ -42,7 +42,7 @@ fun RadioGroup.selectMealType(mealTypeSpecifier: MealTypeSpecifier?) {
         MealTypeSpecifier.LUNCH -> this.check(R.id.lunch)
         MealTypeSpecifier.DINNER -> this.check(R.id.dinner)
         MealTypeSpecifier.SNACK -> this.check(R.id.snack)
-        null -> this.clearCheck()
+        else -> this.clearCheck()
     }
 }
 
@@ -53,7 +53,7 @@ fun RadioGroup.getMealType(): MealTypeSpecifier? =
         R.id.lunch -> MealTypeSpecifier.LUNCH
         R.id.dinner -> MealTypeSpecifier.DINNER
         R.id.snack -> MealTypeSpecifier.SNACK
-        else -> null
+        else -> MealTypeSpecifier.NONE
     }
 
 @BindingAdapter("mealTypeAttrChanged")

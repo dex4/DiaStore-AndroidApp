@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diastore.model.EncryptedUser
 import com.diastore.model.User
 import com.diastore.repo.EntriesRepository
 import com.diastore.repo.UserRepository
@@ -31,41 +32,42 @@ class ProfileViewModel(private val userRepository: UserRepository, private val e
     val user: LiveData<User>
         get() = _user
 
-    fun updateUser(userId: String) {
+    private val _encryptedUser = MutableLiveData<EncryptedUser>()
+    val encryptedUser: LiveData<EncryptedUser>
+        get() = _encryptedUser
+
+    fun getUser(userId: UUID) = createUser(
+        userId,
+        firstName.value,
+        lastName.value,
+        email.value,
+        age.value,
+        weight.value,
+        height.value,
+        carbsToInsulinUnit.value,
+        bloodSugarInsulinUnit.value
+    )
+
+    fun getEncryptedUser() {
         viewModelScope.launch {
-            val user = createUser(
-                UUID.fromString(userId),
-                firstName.value,
-                lastName.value,
-                email.value,
-                age.value,
-                weight.value,
-                height.value,
-                carbsToInsulinUnit.value,
-                bloodSugarInsulinUnit.value
-            )
-            user?.let {
-                userRepository.updateUser(user)
-                _user.value = user
-            }
+            _encryptedUser.value = userRepository.getEncryptedUser()
         }
     }
 
-    fun getUser() {
+    fun saveEncryptedUser(user: EncryptedUser) {
         viewModelScope.launch {
-            setUserDetails(userRepository.getUser())
+            _encryptedUser.value = user
+            userRepository.updateEncryptedUser(user)
         }
     }
 
-    private fun setUserDetails(user: User) {
-        firstName.value = user.firstName
-        lastName.value = user.lastName
-        email.value = user.email
-        height.value = user.height
-        weight.value = user.weight
-        age.value = user.age
-        carbsToInsulinUnit.value = user.carbsToInsulinRatio
-        bloodSugarInsulinUnit.value = user.bloodGlucoseToInsulinRatio
+    fun clearPreviousAuthenticationData() {
+        email.value = ""
+        age.value = null
+        weight.value = null
+        height.value = null
+        carbsToInsulinUnit.value = null
+        bloodSugarInsulinUnit.value = null
     }
 
     private fun createUser(
@@ -101,7 +103,7 @@ class ProfileViewModel(private val userRepository: UserRepository, private val e
     fun clearUserData() {
         CoroutineScope(Dispatchers.IO).launch {
             entriesRepository.deleteAllEntries()
-            userRepository.deleteUser()
+            userRepository.deleteEncryptedUser()
         }
     }
 }

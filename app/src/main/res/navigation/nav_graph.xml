@@ -81,12 +81,6 @@
         tools:layout="@layout/fragment_onboarding">
         <action
             android:id="@+id/action_aboutYouFragment_to_main_navigation"
-            app:destination="@id/main_navigation"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:destination="@id/main_navigation" />
     </fragment>
 </navigation>

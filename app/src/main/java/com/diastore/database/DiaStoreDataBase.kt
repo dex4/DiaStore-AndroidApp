@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.diastore.model.EncryptedUser
 import com.diastore.model.Entry
-import com.diastore.model.User
 
-@Database(entities = [Entry::class, User::class], version = 1, exportSchema = false)
+@Database(entities = [Entry::class, EncryptedUser::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class DiaStoreDataBase : RoomDatabase() {
 
     abstract fun entriesDao(): EntriesDao
-    abstract fun usersDao(): UserDao
+    abstract fun encryptedUserDao(): EncryptedUserDao
 
     companion object {
         @Volatile

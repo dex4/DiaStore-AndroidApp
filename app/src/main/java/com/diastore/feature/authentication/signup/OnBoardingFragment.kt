@@ -3,7 +3,8 @@ package com.diastore.feature.authentication.signup
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.biometric.BiometricPrompt
 import androidx.navigation.fragment.findNavController
 import com.diastore.DiaStoreActivity
 import com.diastore.OnBoardingBinding
@@ -11,6 +12,7 @@ import com.diastore.R
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
 import com.diastore.util.displayIntPickerBottomSheetDialog
+import com.diastore.util.extensions.encryptUser
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.layout.fragment_onboarding) {
@@ -24,17 +26,8 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
         }
 
         binding.buttonConfirm.setOnClickListener {
-            viewModel.addUser()
+            showAndEncrypt()
         }
-
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            SharedPreferencesManager(activity as DiaStoreActivity).saveUser(
-                it.id.toString(),
-                it.firstName,
-                it.lastName
-            )
-            findNavController().navigate(OnBoardingFragmentDirections.actionAboutYouFragmentToMainNavigation())
-        })
 
         binding.ageField.setOnClickListener {
             displayIntPickerBottomSheetDialog(
@@ -97,4 +90,52 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
                 onConfirmClickListener = { bloodSugarInsulinUnit -> viewModel.bloodSugarInsulinUnit.value = bloodSugarInsulinUnit })
         }
     }
+
+    private fun showAndEncrypt() {
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("DiaStoreAuth")
+            .setSubtitle("LogIn using your biometric cred.")
+            .setNegativeButtonText("Use password.")
+            .build()
+
+        BiometricPrompt(this, requireContext().mainExecutor, biometricPromptAuthenticationCallback)
+            .authenticate(promptInfo)
+    }
+
+    fun displayFingerprintAuthenticationError(error: String) {
+        Toast.makeText(context, "Authentication error: $error", Toast.LENGTH_SHORT).show()
+    }
+
+    fun displayFingerprintAuthenticationFailed() {
+        Toast.makeText(context, "Fingerprint not recognized", Toast.LENGTH_SHORT).show()
+    }
+
+    private val biometricPromptAuthenticationCallback = object : BiometricPrompt.AuthenticationCallback() {
+        override fun onAuthenticationError(
+            errorCode: Int,
+            errString: CharSequence
+        ) {
+            super.onAuthenticationError(errorCode, errString)
+            displayFingerprintAuthenticationError(errString.toString())
+        }
+
+        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+            val user = viewModel.getUser()
+            user?.let {
+                val encryptedUser = it.encryptUser()
+                viewModel.saveEncryptedUser(encryptedUser)
+                SharedPreferencesManager(activity as DiaStoreActivity).saveUser(
+                    it.id.toString(),
+                    it.firstName,
+                    it.lastName
+                )
+                findNavController().navigate(OnBoardingFragmentDirections.actionAboutYouFragmentToMainNavigation())
+            }
+        }
+
+        override fun onAuthenticationFailed() {
+            displayFingerprintAuthenticationFailed()
+        }
+    }
+
 }

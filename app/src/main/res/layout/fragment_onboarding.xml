@@ -111,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/vertical_gutter_double"
+                    android:enabled="@{viewModel.isConfirmProfileEnabled}"
                     android:text="@string/on_boarding_button_confirm"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

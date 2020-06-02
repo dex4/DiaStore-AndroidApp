@@ -9,6 +9,6 @@ import com.diastore.util.DataBindingFragment
 class ChallengesFragment : DataBindingFragment<ChallengesBinding>(R.layout.fragment_challenges) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
+
 }

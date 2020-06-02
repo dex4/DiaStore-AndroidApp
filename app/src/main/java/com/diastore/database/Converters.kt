@@ -34,7 +34,7 @@ object Converters {
 
     @TypeConverter
     @JvmStatic
-    fun fromMomentSpecifier(momentSpecifier: MomentSpecifier?): String =
+    fun fromMomentSpecifier(momentSpecifier: MomentSpecifier): String =
         momentSpecifier.toString()
 
     @TypeConverter
@@ -44,7 +44,7 @@ object Converters {
 
     @TypeConverter
     @JvmStatic
-    fun fromMealTypeSpecifier(mealTypeSpecifier: MealTypeSpecifier?): String =
+    fun fromMealTypeSpecifier(mealTypeSpecifier: MealTypeSpecifier): String =
         mealTypeSpecifier.toString()
 
     @TypeConverter

@@ -25,9 +25,9 @@ data class Entry(
 }
 
 enum class MomentSpecifier {
-    BEFORE_MEAL, AFTER_MEAL
+    BEFORE_MEAL, AFTER_MEAL, NONE
 }
 
 enum class MealTypeSpecifier {
-    BREAKFAST, LUNCH, DINNER, SNACK
+    BREAKFAST, LUNCH, DINNER, SNACK, NONE
 }

@@ -2,6 +2,7 @@ package com.diastore.shared
 
 import androidx.room.Room
 import com.diastore.database.DiaStoreDataBase
+import com.diastore.feature.authentication.fingerprintauth.FingerprintAuthViewModel
 import com.diastore.feature.authentication.login.LoginViewModel
 import com.diastore.feature.authentication.signup.SignUpViewModel
 import com.diastore.feature.entrydetails.EntryDetailsViewModel
@@ -18,6 +19,7 @@ val viewModels = module {
     single { HomeViewModel(get()) }
     single { ProfileViewModel(get(), get()) }
     single { EntryDetailsViewModel() }
+    single { FingerprintAuthViewModel() }
 }
 
 val repositories = module {
@@ -31,5 +33,5 @@ val repositories = module {
         ).fallbackToDestructiveMigration().build()
     }
     single { get<DiaStoreDataBase>().entriesDao() }
-    single { get<DiaStoreDataBase>().usersDao() }
+    single { get<DiaStoreDataBase>().encryptedUserDao() }
 }
