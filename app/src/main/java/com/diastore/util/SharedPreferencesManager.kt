@@ -1,12 +1,12 @@
 package com.diastore.util
 
 
-import android.content.Context.MODE_PRIVATE
+import android.content.Context
 import android.content.SharedPreferences
-import com.diastore.DiaStoreActivity
+import androidx.preference.PreferenceManager
 
-class SharedPreferencesManager(activity: DiaStoreActivity) {
-    private var sharedPreferences: SharedPreferences = activity.getPreferences(MODE_PRIVATE)
+class SharedPreferencesManager(context: Context) {
+    private var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     private var isUserLoggedIn: Boolean
         get() = sharedPreferences.getBoolean(USER_LOGGED_IN_KEY, false)
         set(value) {

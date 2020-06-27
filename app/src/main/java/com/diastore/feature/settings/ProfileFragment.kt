@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.diastore.DiaStoreActivity
 import com.diastore.ProfileBinding
 import com.diastore.R
 import com.diastore.util.BaseFragment
@@ -16,14 +15,15 @@ import com.diastore.util.EncryptionUtils
 import com.diastore.util.SharedPreferencesManager
 import com.diastore.util.displayIntPickerBottomSheetDialog
 import com.diastore.util.extensions.encryptUser
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.UUID
 
 class ProfileFragment : BaseFragment<ProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
     override val viewModel by viewModel<ProfileViewModel>()
+    private val sharedPreferencesManager by inject<SharedPreferencesManager>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val sharedPreferencesManager = SharedPreferencesManager(activity as DiaStoreActivity)
         viewModel.firstName.value = sharedPreferencesManager.getUserFirstName()
         viewModel.lastName.value = sharedPreferencesManager.getUserLastName()
         viewModel.clearPreviousAuthenticationData()
@@ -126,7 +126,7 @@ class ProfileFragment : BaseFragment<ProfileBinding, ProfileViewModel>(R.layout.
     }
 
     fun displayFingerprintAuthenticationError(error: String) {
-        Toast.makeText(requireContext(), "Authentication error: ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Authentication error: $error", Toast.LENGTH_SHORT).show()
     }
 
     fun displayFingerprintAuthenticationFailed() {
@@ -168,7 +168,7 @@ class ProfileFragment : BaseFragment<ProfileBinding, ProfileViewModel>(R.layout.
         }
 
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-            SharedPreferencesManager(activity as DiaStoreActivity).getUserId()?.let { id ->
+            sharedPreferencesManager.getUserId()?.let { id ->
                 val user = viewModel.getUser(UUID.fromString(id))
                 user?.encryptUser()?.let {
                     viewModel.saveEncryptedUser(it)

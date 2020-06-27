@@ -5,23 +5,24 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.diastore.DiaStoreActivity
 import com.diastore.LoginBinding
 import com.diastore.R
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.UUID
 
 
 class LogInFragment : BaseFragment<LoginBinding, LoginViewModel>(R.layout.fragment_login) {
     override val viewModel by viewModel<LoginViewModel>()
+    private val sharedPreferencesManager by inject<SharedPreferencesManager>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonLogin.setOnClickListener {
-            SharedPreferencesManager(activity as DiaStoreActivity).saveUser(
+            sharedPreferencesManager.saveUser(
                 UUID.randomUUID().toString(),
                 "John",
                 "Doe"

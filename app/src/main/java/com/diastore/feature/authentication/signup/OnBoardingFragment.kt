@@ -6,17 +6,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.biometric.BiometricPrompt
 import androidx.navigation.fragment.findNavController
-import com.diastore.DiaStoreActivity
 import com.diastore.OnBoardingBinding
 import com.diastore.R
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
 import com.diastore.util.displayIntPickerBottomSheetDialog
 import com.diastore.util.extensions.encryptUser
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.layout.fragment_onboarding) {
     override val viewModel by sharedViewModel<SignUpViewModel>()
+    private val sharedPreferencesManager by inject<SharedPreferencesManager>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -124,7 +125,7 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
             user?.let {
                 val encryptedUser = it.encryptUser()
                 viewModel.saveEncryptedUser(encryptedUser)
-                SharedPreferencesManager(activity as DiaStoreActivity).saveUser(
+                sharedPreferencesManager.saveUser(
                     it.id.toString(),
                     it.firstName,
                     it.lastName

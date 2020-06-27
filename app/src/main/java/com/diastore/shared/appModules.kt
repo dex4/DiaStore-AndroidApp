@@ -10,7 +10,9 @@ import com.diastore.feature.home.HomeViewModel
 import com.diastore.feature.settings.ProfileViewModel
 import com.diastore.repo.EntriesRepository
 import com.diastore.repo.UserRepository
+import com.diastore.util.SharedPreferencesManager
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val viewModels = module {
@@ -34,4 +36,8 @@ val repositories = module {
     }
     single { get<DiaStoreDataBase>().entriesDao() }
     single { get<DiaStoreDataBase>().encryptedUserDao() }
+}
+
+val sharedPreferencesManager = module {
+    single { SharedPreferencesManager(androidContext()) }
 }

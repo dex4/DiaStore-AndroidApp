@@ -8,13 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.diastore.DiaStoreActivity
 import com.diastore.DrawerHeaderBinding
 import com.diastore.HomeBinding
 import com.diastore.R
 import com.diastore.feature.entrydetails.EntryDetailsViewModel
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,13 +22,13 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_
     override val viewModel by viewModel<HomeViewModel>()
     private val entryDetailsSharedViewModel by sharedViewModel<EntryDetailsViewModel>()
     private val adapter: EntryAdapter = EntryAdapter()
+    private val sharedPreferencesManager by inject<SharedPreferencesManager>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.navView.setupWithNavController(findNavController())
         DrawerHeaderBinding.bind(binding.navView.getHeaderView(0)).apply {
-            val sharedPreferencesManager = SharedPreferencesManager(activity as DiaStoreActivity)
             userName = getString(
                 R.string.drawer_user_name_format,
                 sharedPreferencesManager.getUserFirstName(),
