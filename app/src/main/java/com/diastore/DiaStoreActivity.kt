@@ -1,7 +1,7 @@
 package com.diastore
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 class DiaStoreActivity : AppCompatActivity() {
 
@@ -9,5 +9,7 @@ class DiaStoreActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diastore)
+
+        (application as DiaStoreApplication).startKoinApplication()
     }
 }

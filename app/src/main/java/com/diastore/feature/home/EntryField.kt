@@ -4,9 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
-import com.diastore.EntryFieldBinding
 import com.diastore.R
+import com.diastore.databinding.ViewEntryFieldBinding
 
 class EntryField @JvmOverloads constructor(
     context: Context,
@@ -14,11 +13,9 @@ class EntryField @JvmOverloads constructor(
     defStyle: Int = 0,
     defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle, defStyleRes) {
-    private val binding: EntryFieldBinding = DataBindingUtil.inflate(
+    private val binding: ViewEntryFieldBinding = ViewEntryFieldBinding.inflate(
         LayoutInflater.from(context),
-        R.layout.view_entry_field,
-        this,
-        true
+        this
     )
 
     init {

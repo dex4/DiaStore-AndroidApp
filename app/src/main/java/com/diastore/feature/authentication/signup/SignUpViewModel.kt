@@ -12,8 +12,10 @@ import com.diastore.repo.UserRepository
 import com.diastore.util.extensions.combineNonNull
 import com.diastore.util.extensions.isValidEmail
 import com.diastore.util.extensions.isValidPassword
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.UUID
+import kotlinx.coroutines.withContext
 
 class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() {
 
@@ -30,6 +32,10 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
     private val _signUpResponse = MutableLiveData<User>()
     val signUpResponse: LiveData<User>
@@ -68,45 +74,44 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
         return age != 0 && weight != 0 && height != 0 && carbsToInsulinUnit != 0 && bloodSugarInsulinUnit != 0
     }
 
-    private fun createUser(
-        firstName: String?,
-        lastName: String?,
-        email: String?,
-        age: Int?,
-        weight: Int?,
-        height: Int?,
-        carbsToInsulinUnit: Int?,
-        bloodSugarInsulinUnit: Int?
-    ): User? =
-        if (firstName == null || lastName == null || email == null || age == null ||
-            weight == null || height == null || carbsToInsulinUnit == null || bloodSugarInsulinUnit == null
-        ) {
-            null
-        } else {
-            User(
-                UUID.randomUUID(),
-                firstName,
-                lastName,
-                email,
-                "",
-                weight,
-                height,
-                carbsToInsulinUnit,
-                bloodSugarInsulinUnit,
-                age
-            )
-        }
+    fun signUpUser() {
+        val firstName = firstName.value
+        val lastName = lastName.value
+        val email = email.value
+        val password = password.value
+        val weight = weight.value
+        val height = height.value
+        val carbsToInsulinUnit = carbsToInsulinUnit.value
+        val bloodSugarInsulinUnit = bloodSugarInsulinUnit.value
+        val age = age.value
 
-    fun getUser() = createUser(
-        firstName.value,
-        lastName.value,
-        email.value,
-        age.value,
-        weight.value,
-        height.value,
-        carbsToInsulinUnit.value,
-        bloodSugarInsulinUnit.value
-    )
+        if (firstName != null && lastName != null && email != null && age != null && password != null &&
+            weight != null && height != null && carbsToInsulinUnit != null && bloodSugarInsulinUnit != null
+        ) {
+            _isLoading.value = true
+            CoroutineScope(Dispatchers.IO).launch {
+                withContext(Dispatchers.Main) {
+                    try {
+                        _signUpResponse.value = userRepository.signUpUser(
+                            firstName,
+                            lastName,
+                            email,
+                            password,
+                            weight,
+                            height,
+                            carbsToInsulinUnit,
+                            bloodSugarInsulinUnit,
+                            age
+                        )
+                    } catch (t: Throwable) {
+                        _error.value = t.message
+                    } finally {
+                        _isLoading.value = false
+                    }
+                }
+            }
+        }
+    }
 
     fun saveEncryptedUser(user: EncryptedUser) {
         viewModelScope.launch {

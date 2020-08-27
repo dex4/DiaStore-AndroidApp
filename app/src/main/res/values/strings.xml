@@ -38,11 +38,11 @@
 
     <!--region Home-->
     <string name="home_title">Home</string>
-    <string name="drawer_user_name_format">%s %s</string>
+    <string name="drawer_user_name_format">%s\n%s</string>
     <string name="drawer_food_item_title">Food</string>
     <string name="drawer_physical_item_title">Physical Activities</string>
     <string name="drawer_challenges_item_title">Challenges</string>
-    <string name="drawer_settings_item_title">Settings</string>
+    <string name="drawer_profile_item_title">Profile</string>
     <string name="drawer_about_item_title">About</string>
     <string name="drawer_statistics_item_title">Statistics</string>
     <!--endregion-->
@@ -131,4 +131,11 @@
     <string name="profile_field_label_bloodsugar_to_insulin">Bloodsugar to insulin</string>
     <string name="profile_field_label_log_out">Log Out</string>
     <string name="profile_button_done">Done</string>
+
+    <!--region BiometricPrompt-->
+    <string name="biometric_prompt_authentication_title">DiaStore Authentication</string>
+    <string name="biometric_prompt_authentication_subtitle">LogIn using your biometric credentials</string>
+    <string name="biometric_prompt_authentication_negative_button_text">Cancel</string>
+    <string name="biometric_prompt_authentication_authentication_failed_message">Fingerprint not recognized</string>
+    <string name="error_message">Something went wrong. Try again later.</string>
 </resources>

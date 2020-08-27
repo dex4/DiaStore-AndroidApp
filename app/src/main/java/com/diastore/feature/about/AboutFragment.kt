@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.diastore.AboutBinding
 import com.diastore.R
-import com.diastore.util.DataBindingFragment
+import com.diastore.databinding.FragmentAboutBinding
+import com.diastore.util.ViewBindingFragment
 
-class AboutFragment : DataBindingFragment<AboutBinding>(R.layout.fragment_about) {
+class AboutFragment : ViewBindingFragment<FragmentAboutBinding>() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setViewBinding(FragmentAboutBinding.inflate(layoutInflater))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

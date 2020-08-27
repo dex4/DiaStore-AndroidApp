@@ -4,9 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
-import com.diastore.ProfileDetailsFieldBinding
 import com.diastore.R
+import com.diastore.databinding.ViewProfileFieldBinding
 
 class ProfileDetailsField @JvmOverloads constructor(
     context: Context,
@@ -14,11 +13,9 @@ class ProfileDetailsField @JvmOverloads constructor(
     defStyle: Int = 0,
     defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle, defStyleRes) {
-    private val binding: ProfileDetailsFieldBinding = DataBindingUtil.inflate(
+    private val binding = ViewProfileFieldBinding.inflate(
         LayoutInflater.from(context),
-        R.layout.view_profile_field,
-        this,
-        true
+        this
     )
 
     init {

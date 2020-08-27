@@ -18,5 +18,5 @@ interface EncryptedUserDao {
     suspend fun getEncryptedUser(): List<EncryptedUser>
 
     @Query("delete from encryptedUser")
-    suspend fun deleteAll()
+    suspend fun deleteAll(): Int
 }

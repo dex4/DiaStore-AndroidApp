@@ -130,7 +130,6 @@
 
     <style name="RoundedBottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet_rounded_corners</item>
-
     </style>
 
     <style name="RoundedBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">

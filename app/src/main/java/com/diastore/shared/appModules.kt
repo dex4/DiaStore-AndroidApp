@@ -2,15 +2,16 @@ package com.diastore.shared
 
 import androidx.room.Room
 import com.diastore.database.DiaStoreDataBase
-import com.diastore.feature.authentication.fingerprintauth.FingerprintAuthViewModel
 import com.diastore.feature.authentication.login.LoginViewModel
 import com.diastore.feature.authentication.signup.SignUpViewModel
 import com.diastore.feature.entrydetails.EntryDetailsViewModel
 import com.diastore.feature.home.HomeViewModel
-import com.diastore.feature.settings.ProfileViewModel
+import com.diastore.feature.profile.ProfileViewModel
 import com.diastore.repo.EntriesRepository
 import com.diastore.repo.UserRepository
+import com.diastore.util.SharedPreferencesManager
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val viewModels = module {
@@ -19,11 +20,10 @@ val viewModels = module {
     single { HomeViewModel(get()) }
     single { ProfileViewModel(get(), get()) }
     single { EntryDetailsViewModel() }
-    single { FingerprintAuthViewModel() }
 }
 
 val repositories = module {
-    factory { EntriesRepository(get()) }
+    factory { EntriesRepository(get(), get()) }
     factory { UserRepository(get(), get()) }
     single {
         Room.databaseBuilder(
@@ -34,4 +34,8 @@ val repositories = module {
     }
     single { get<DiaStoreDataBase>().entriesDao() }
     single { get<DiaStoreDataBase>().encryptedUserDao() }
+}
+
+val sharedPreferencesManager = module {
+    single { SharedPreferencesManager(androidContext()) }
 }

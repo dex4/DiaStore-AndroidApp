@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_field_height"
+            android:background="?selectableItemBackground"
+            app:drawableEndCompat="@drawable/ic_exit"
+            app:drawableTint="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/horizontal_margin"
+            android:text="@string/profile_field_label_log_out"
+            android:textAppearance="@style/Body1.Bold"
+            android:textColor="@color/colorPrimary" />
+    </FrameLayout>
+</merge>

@@ -35,7 +35,7 @@ class EntryDetailsFragment : BaseFragment<EntryDetailsBinding, EntryDetailsViewM
                 setOnDateSetListener { _, year, month, dayOfMonth ->
                     TimePickerDialog(
                         requireContext(),
-                        TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                        { _, hourOfDay, minute ->
                             setEntryTime(year, month + 1, dayOfMonth, hourOfDay, minute)
                         },
                         localDateTime.hour,

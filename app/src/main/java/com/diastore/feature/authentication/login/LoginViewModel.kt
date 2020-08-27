@@ -6,8 +6,10 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.diastore.model.EncryptedUser
 import com.diastore.model.User
-import com.diastore.service.UserService
+import com.diastore.repo.UserRepository
 import com.diastore.util.extensions.combineNonNull
 import com.diastore.util.extensions.isValidEmail
 import com.diastore.util.extensions.isValidPassword
@@ -16,11 +18,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginViewModel(private val userService: UserService) : ViewModel() {
+class LoginViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
     val email = MutableLiveData("")
     val password = MutableLiveData("")
@@ -60,18 +66,24 @@ class LoginViewModel(private val userService: UserService) : ViewModel() {
             this@LoginViewModel.password.value?.let {
                 password = it
             }
-            val request = userService.login(email, password)
 
             withContext(Dispatchers.Main) {
                 try {
-                    _user.value = request.await()
+                    val user = userRepository.logInUser(email, password)
+                    _user.value = user
                     _isLoading.value = false
                 } catch (e: Throwable) {
                     Log.e("WRKR", e.toString())
                     _isLoading.value = false
-//                    _getError.value = e.message
+                    _error.value = e.message
                 }
             }
+        }
+    }
+
+    fun saveEncryptedUser(user: EncryptedUser) {
+        viewModelScope.launch {
+            userRepository.addEncryptedUser(user)
         }
     }
 }

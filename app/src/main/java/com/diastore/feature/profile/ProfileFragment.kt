@@ -1,24 +1,35 @@
-package com.diastore.feature.authentication.signup
+package com.diastore.feature.profile
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.diastore.OnBoardingBinding
+import com.diastore.ProfileBinding
 import com.diastore.R
 import com.diastore.shared.DiaStoreBiometricPrompt
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
 import com.diastore.util.displayIntPickerBottomSheetDialog
-import com.diastore.util.extensions.encryptUser
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.GlobalContext
+import java.util.UUID
 
-class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.layout.fragment_onboarding) {
-    override val viewModel by sharedViewModel<SignUpViewModel>()
+class ProfileFragment : BaseFragment<ProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
+    override val viewModel by viewModel<ProfileViewModel>()
     private val sharedPreferencesManager by inject<SharedPreferencesManager>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        viewModel.firstName.value = sharedPreferencesManager.getUserFirstName()
+        viewModel.lastName.value = sharedPreferencesManager.getUserLastName()
+        viewModel.clearPreviousAuthenticationData()
+        authenticateForDecryption()
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +39,7 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
         }
 
         binding.buttonConfirm.setOnClickListener {
-            viewModel.signUpUser()
+            authenticateForEncryption()
         }
 
         binding.ageField.setOnClickListener {
@@ -92,8 +103,15 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
                 onConfirmClickListener = { bloodSugarInsulinUnit -> viewModel.bloodSugarInsulinUnit.value = bloodSugarInsulinUnit })
         }
 
-        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer {
-            showAndEncrypt()
+        binding.buttonLogOut.setOnClickListener {
+            viewModel.clearUserData()
+        }
+
+        viewModel.deletedData.observe(viewLifecycleOwner, Observer {
+            if (it != -1) {
+                sharedPreferencesManager.clearUserData()
+                restartActivity()
+            }
         })
 
         viewModel.error.observe(viewLifecycleOwner, Observer {
@@ -101,16 +119,22 @@ class OnBoardingFragment : BaseFragment<OnBoardingBinding, SignUpViewModel>(R.la
         })
     }
 
-    private fun showAndEncrypt() {
+    private fun restartActivity() {
+        GlobalContext.stop()
+        requireActivity().finish()
+        requireActivity().startActivity(requireActivity().intent)
+    }
+
+    private fun authenticateForDecryption() {
         DiaStoreBiometricPrompt(requireContext(), this, requireContext().mainExecutor) { _ ->
-            viewModel.signUpResponse.value?.let {
-                viewModel.saveEncryptedUser(it.encryptUser())
-                sharedPreferencesManager.saveUser(
-                    it.id.toString(),
-                    it.firstName,
-                    it.lastName
-                )
-                findNavController().navigate(OnBoardingFragmentDirections.actionAboutYouFragmentToMainNavigation())
+            viewModel.getEncryptedUser()
+        }.authenticate()
+    }
+
+    private fun authenticateForEncryption() {
+        DiaStoreBiometricPrompt(requireContext(), this, requireContext().mainExecutor) { _ ->
+            sharedPreferencesManager.getUserId()?.let { id ->
+                viewModel.updateUser(UUID.fromString(id))
             }
         }.authenticate()
     }

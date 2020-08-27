@@ -8,33 +8,47 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.diastore.DiaStoreActivity
 import com.diastore.DrawerHeaderBinding
 import com.diastore.HomeBinding
 import com.diastore.R
 import com.diastore.feature.entrydetails.EntryDetailsViewModel
 import com.diastore.util.BaseFragment
 import com.diastore.util.SharedPreferencesManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.UUID
 
 class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_home) {
     override val viewModel by viewModel<HomeViewModel>()
     private val entryDetailsSharedViewModel by sharedViewModel<EntryDetailsViewModel>()
+    private val sharedPreferencesManager by inject<SharedPreferencesManager>()
     private val adapter: EntryAdapter = EntryAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedPreferencesManager.getUserId()?.let {
+            viewModel.getEntries(UUID.fromString(it))
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.navView.setupWithNavController(findNavController())
         DrawerHeaderBinding.bind(binding.navView.getHeaderView(0)).apply {
-            val sharedPreferencesManager = SharedPreferencesManager(activity as DiaStoreActivity)
             userName = getString(
                 R.string.drawer_user_name_format,
                 sharedPreferencesManager.getUserFirstName(),
                 sharedPreferencesManager.getUserLastName()
             )
         }
+
+        binding.entriesSwipeRefreshLayout.setColorSchemeColors(
+            resources.getColor(R.color.colorPrimaryLight, null),
+            resources.getColor(R.color.colorPrimary, null),
+            resources.getColor(R.color.colorPrimaryDark, null)
+        )
 
         binding.entriesRecycler.adapter = adapter.apply {
             setOnEntryClickListener {
@@ -57,25 +71,31 @@ class HomeFragment : BaseFragment<HomeBinding, HomeViewModel>(R.layout.fragment_
         })
 
         binding.entriesSwipeRefreshLayout.setOnRefreshListener {
-            viewModel.getEntries()
+            sharedPreferencesManager.getUserId()?.let {
+                viewModel.getEntries(UUID.fromString(it))
+            }
         }
 
-        entryDetailsSharedViewModel.updatedEntry.observe(viewLifecycleOwner, Observer {
-            viewModel.handleSelectedEntryChange(it)
+        entryDetailsSharedViewModel.updatedEntry.observe(viewLifecycleOwner, Observer { entry ->
+            sharedPreferencesManager.getUserId()?.let { userId ->
+                viewModel.handleSelectedEntryChange(UUID.fromString(userId), entry)
+            }
         })
 
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+        })
+
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.challenges -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChallengesFragment())
                 R.id.settings -> {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
                 }
                 R.id.about -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAboutFragment())
-                R.id.statistics -> Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
             }
             true
         }

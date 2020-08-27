@@ -12,6 +12,9 @@ interface EntriesDao {
     @Insert
     suspend fun insert(entry: Entry)
 
+    @Insert
+    suspend fun insertAllEntries(entries: List<Entry>)
+
     @Update
     suspend fun update(entry: Entry)
 

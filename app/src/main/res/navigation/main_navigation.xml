@@ -17,9 +17,6 @@
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_challengesFragment"
-            app:destination="@id/challengesFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_entryDetailsFragment"
             app:destination="@id/entryDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -30,7 +27,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.diastore.feature.settings.ProfileFragment"
+        android:name="com.diastore.feature.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
@@ -46,12 +43,6 @@
         android:name="com.diastore.feature.about.AboutFragment"
         android:label="AboutFragment"
         tools:layout="@layout/fragment_about" />
-
-    <fragment
-        android:id="@+id/challengesFragment"
-        android:name="com.diastore.feature.challenges.ChallengesFragment"
-        android:label="ChallengesFragment"
-        tools:layout="@layout/fragment_challenges" />
 
     <fragment
         android:id="@+id/entryDetailsFragment"

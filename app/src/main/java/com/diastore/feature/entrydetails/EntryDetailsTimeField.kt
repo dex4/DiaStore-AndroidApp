@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
-import com.diastore.EntryDetailsTimeFieldBinding
-import com.diastore.R
+import com.diastore.databinding.ViewEntryDetailsTimeFieldBinding
 
 class EntryDetailsTimeField @JvmOverloads constructor(
     context: Context,
@@ -14,11 +12,9 @@ class EntryDetailsTimeField @JvmOverloads constructor(
     defStyle: Int = 0,
     defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle, defStyleRes) {
-    private val binding: EntryDetailsTimeFieldBinding = DataBindingUtil.inflate(
+    private val binding = ViewEntryDetailsTimeFieldBinding.inflate(
         LayoutInflater.from(context),
-        R.layout.view_entry_details_time_field,
-        this,
-        true
+        this
     )
 
     fun setEntryTimeText(entryTime: String?) {

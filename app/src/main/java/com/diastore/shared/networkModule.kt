@@ -1,7 +1,10 @@
 package com.diastore.shared
 
+import com.diastore.model.dto.OffsetDateTimeAdapter
+import com.diastore.model.dto.UUIDAdapter
+import com.diastore.service.EntriesService
 import com.diastore.service.UserService
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +17,7 @@ val networkModule = module {
     single { provideDefaultOkHttpClient() }
     single { provideRetrofit(get()) }
     single { provideUserService(get()) }
+    single { provideEntriesService(get()) }
 }
 
 fun provideDefaultOkHttpClient(): OkHttpClient {
@@ -22,7 +26,7 @@ fun provideDefaultOkHttpClient(): OkHttpClient {
 
     val headerAuthorizationInterceptor = Interceptor { chain ->
 
-        val request = chain.request().url().newBuilder().build()
+        val request = chain.request().url.newBuilder().build()
         val newRequest = chain.request().newBuilder()
             .header("Content-Type", "application/json")
             .url(request)
@@ -45,12 +49,16 @@ fun provideDefaultOkHttpClient(): OkHttpClient {
 }
 
 fun provideRetrofit(client: OkHttpClient): Retrofit {
+    val moshi = Moshi.Builder()
+        .add(UUIDAdapter())
+        .add(OffsetDateTimeAdapter())
+        .build()
     return Retrofit.Builder()
-        .baseUrl("https://jsonplaceholder.typicode.com")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .baseUrl("https://diastore-api.conveyor.cloud")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .client(client)
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 }
 
 fun provideUserService(retrofit: Retrofit): UserService = retrofit.create(UserService::class.java)
+fun provideEntriesService(retrofit: Retrofit): EntriesService = retrofit.create(EntriesService::class.java)

@@ -4,12 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.InverseBindingListener
 import androidx.databinding.InverseBindingMethod
 import androidx.databinding.InverseBindingMethods
-import com.diastore.EntryDetailsFieldBinding
 import com.diastore.R
+import com.diastore.databinding.ViewEntryDetailsFieldBinding
 import com.diastore.util.AbstractTextWatcher
 
 @InverseBindingMethods(
@@ -22,11 +21,9 @@ class EntryDetailsField @JvmOverloads constructor(
     defStyle: Int = 0,
     defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle, defStyleRes) {
-    private val binding: EntryDetailsFieldBinding = DataBindingUtil.inflate(
+    private val binding = ViewEntryDetailsFieldBinding.inflate(
         LayoutInflater.from(context),
-        R.layout.view_entry_details_field,
-        this,
-        true
+        this
     )
     private var fieldValue: String? = ""
     private var inverseBindingValueListener: InverseBindingListener? = null

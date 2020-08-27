@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.diastore.feature.settings.ProfileViewModel" />
+            type="com.diastore.feature.profile.ProfileViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -126,15 +126,13 @@
                     app:layout_constraintTop_toBottomOf="@id/carbs_to_insulin_unit_field"
                     app:profileFieldName="@string/profile_field_label_bloodsugar_to_insulin" />
 
-                <include
+                <com.diastore.feature.profile.LogOutButton
                     android:id="@+id/button_log_out"
-                    layout="@layout/layout_profile_log_out_field"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/profile_field_height"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/blood_sugar_insulin_unit_field" />
-
 
                 <Button
                     android:id="@+id/button_confirm"

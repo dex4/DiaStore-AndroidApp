@@ -102,7 +102,7 @@ class ProfileViewModel(private val userRepository: UserRepository, private val e
 
     fun clearUserData() {
         CoroutineScope(Dispatchers.IO).launch {
-            entriesRepository.deleteAllEntries()
+//            entriesRepository.deleteAllEntries()
             userRepository.deleteEncryptedUser()
         }
     }

@@ -1,69 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/profile_bottom_sheet_dialog_height">
 
-    <data class=".BottomSheetProfileNumberPickerBinding" />
+    <TextView
+        android:id="@+id/sheet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/vertical_gutter"
+        android:textAppearance="@style/Headline5.Bold"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/profile_bottom_sheet_dialog_age_title" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/profile_bottom_sheet_dialog_height">
+    <ImageButton
+        android:id="@+id/button_info"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_info"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/sheet_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sheet_title"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/sheet_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/vertical_gutter"
-            android:textAppearance="@style/Headline5.Bold"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/profile_bottom_sheet_dialog_age_title" />
+    <NumberPicker
+        android:id="@+id/age_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/button_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sheet_title" />
 
-        <ImageButton
-            android:id="@+id/button_info"
-            style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_info"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/sheet_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sheet_title"
-            tools:ignore="ContentDescription"
-            tools:visibility="visible" />
+    <Button
+        android:id="@+id/button_confirm"
+        style="@style/TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/profile_bottom_sheet_dialog_button_height"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:layout_marginBottom="@dimen/vertical_gutter"
+        android:text="@string/profile_bottom_sheet_dialog_confirm_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <NumberPicker
-            android:id="@+id/age_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/button_cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sheet_title" />
-
-        <Button
-            android:id="@+id/button_confirm"
-            style="@style/TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/profile_bottom_sheet_dialog_button_height"
-            android:layout_marginEnd="@dimen/horizontal_margin"
-            android:layout_marginBottom="@dimen/vertical_gutter"
-            android:text="@string/profile_bottom_sheet_dialog_confirm_button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/button_cancel"
-            style="@style/TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/profile_bottom_sheet_dialog_button_height"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginBottom="@dimen/vertical_gutter"
-            android:text="@string/profile_bottom_sheet_dialog_cancel_button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <Button
+        android:id="@+id/button_cancel"
+        style="@style/TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/profile_bottom_sheet_dialog_button_height"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginBottom="@dimen/vertical_gutter"
+        android:text="@string/profile_bottom_sheet_dialog_cancel_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.diastore.model.Entry
 import com.diastore.model.MealTypeSpecifier
 import com.diastore.model.MomentSpecifier
+import com.diastore.util.extensions.SingleLiveEvent
 import org.threeten.bp.OffsetDateTime
 import java.util.UUID
 
@@ -15,7 +16,7 @@ class EntryDetailsViewModel : ViewModel() {
     val entry: LiveData<Entry>
         get() = _entry
 
-    private val _updatedEntry = MutableLiveData<Entry>()
+    private val _updatedEntry = SingleLiveEvent<Entry>()
     val updatedEntry: LiveData<Entry>
         get() = _updatedEntry
 

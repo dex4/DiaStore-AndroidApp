@@ -3,9 +3,7 @@ package com.diastore.util
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.diastore.BottomSheetProfileNumberPickerBinding
-import com.diastore.R
+import com.diastore.databinding.BottomSheetProfileNumberPickerBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun displayIntPickerBottomSheetDialog(
@@ -21,9 +19,8 @@ fun displayIntPickerBottomSheetDialog(
     onCancelClickListener: (() -> Unit)? = null
 ) {
     val dialog = BottomSheetDialog(context)
-    val binding = DataBindingUtil.inflate<BottomSheetProfileNumberPickerBinding>(
+    val binding = BottomSheetProfileNumberPickerBinding.inflate(
         layoutInflater,
-        R.layout.bottom_sheet_profile_number_picker,
         parent,
         false
     )
